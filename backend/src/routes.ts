@@ -3,11 +3,11 @@ import { Router, Request, Response } from "express";
  const router = Router();
 
  router.get('/teste', (req: Request, res: Response)=>{
+    // throw new Error("Erro ao fazer req")
     return res.json({
-        ok: true
+        ok: 'true'
     })
  })
 
  export {router}
 
- CONTINUAR TRATANDO ERROS
