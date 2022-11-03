@@ -13,32 +13,30 @@ datasource db {
 //dados bd
 
 model User {
-  id       String @id @default(uuid())
+  id       Int @id @default(autoincrement())
   name     String
   email    String
   password String
   access   String @default("admin")
 
   created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
 
   @@map("users")
 }
 
 model Product {
-  id     String @id @default(uuid())
+  id     Int @id @default(autoincrement())
   name   String
   amount String
   color  String
 
   created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
 
   category    Category @relation(fields: [category_id], references: [id])
-  category_id String
+  category_id Int
 
   size    Size   @relation(fields: [size_id], references: [id])
-  size_id String
+  size_id Int
 
   sale_now SaleNow[]
 
@@ -46,11 +44,10 @@ model Product {
 }
 
 model Category {
-  id   String @id @default(uuid())
+  id   Int @id @default(autoincrement())
   name String
 
   created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
   product    Product[] //ref produtos
   size Size[]
 
@@ -58,14 +55,13 @@ model Category {
 }
 
 model Size {
-  id    String  @id @default(uuid())
+  id    Int @id @default(autoincrement())
   name  String
   price Decimal
 
   created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
 
-  category_id String
+  category_id Int
   category Category @relation(fields: [category_id], references: [id])
 
   product Product[]
@@ -74,16 +70,13 @@ model Size {
 }
 
 model SaleNow {
-  id        String   @id @default(uuid())
-  date_sale DateTime
+  id        Int @id @default(autoincrement())
+  date_sale DateTime @default(now())
   amount    Decimal
   price     Decimal
 
-  created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
-
   product    Product @relation(fields: [product_id], references: [id])
-  product_id String
+  product_id Int
 
   @@map("salesNow")
 }
