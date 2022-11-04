@@ -3093,10 +3093,10 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:zoom="1.575"
-     inkscape:cx="231.11112"
-     inkscape:cy="99.682542"
+     inkscape:cx="226.98413"
+     inkscape:cy="100.31746"
      inkscape:window-width="1366"
-     inkscape:window-height="705"
+     inkscape:window-height="715"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
@@ -3125,7 +3125,10 @@
        transform="matrix(0.64106213,0,0,0.64106213,-9.8789442,288.31263)">
       <g
          id="g12723"
-         transform="translate(-22.284447,59.425192)">
+         transform="matrix(0.99893815,0,0,0.99893815,-22.025467,59.596755)"
+         inkscape:export-filename="logoproject.png"
+         inkscape:export-xdpi="97.406006"
+         inkscape:export-ydpi="97.406006">
         <g
            id="g8755"
            transform="matrix(0.67894052,0,0,0.63452588,13.252546,20.378118)">
