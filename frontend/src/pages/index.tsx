@@ -6,6 +6,8 @@ import styles from './styles.module.scss'
 import Link from 'next/link'
 import { AuthContext } from '../contexts/AuthContext'
 import { toast } from 'react-hot-toast'
+import { canSSRGuest } from '../utils/canSSRGuest'
+import { canSSRAuth } from '../utils/canSSRAuth'
 
 import { FormEvent, useState, useContext } from 'react'
 
@@ -79,3 +81,13 @@ export default function Home() {
     </>
   )
 }
+
+//rota publica
+export const getServerSideProps = canSSRGuest(
+  async (ctx) => {
+    return {
+      props: {}
+    }
+  }
+)
+
