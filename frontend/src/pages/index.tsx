@@ -5,6 +5,7 @@ import logoImg from '../../public/logoproject.png'
 import styles from './styles.module.scss'
 import Link from 'next/link'
 import { AuthContext } from '../contexts/AuthContext'
+import { toast } from 'react-hot-toast'
 
 import { FormEvent, useState, useContext } from 'react'
 
@@ -14,10 +15,19 @@ export default function Home() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
+
   const { signIn } = useContext(AuthContext)
 
   async function handleLogin(e: FormEvent) {
     e.preventDefault();
+
+    if (email === '' || password === '') {
+      toast.error("Preencha todos os campos!!!")
+      return;
+    }
+
+    //loading
+    setLoading(true)
 
     let data = {
       email,
@@ -26,6 +36,8 @@ export default function Home() {
 
     await signIn(data)
 
+    //termina loading
+    setLoading(false)
   }
 
   return (
@@ -44,8 +56,8 @@ export default function Home() {
               type={'email'}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-
             />
+
             <input
               placeholder='Sua senha...'
               type={'password'}
@@ -53,13 +65,13 @@ export default function Home() {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button type={'submit'}>Acessar</button>
-
-            <Link href='/signUp' legacyBehavior>
-              <a>Não tem uma Conta? <strong style={{ color: '#00DFBF' }}>Crie uma agora mesmo!</strong></a>
-            </Link>
+            <button type={'submit'} disabled={loading ? true : false}>{loading ? 'Logando...' : 'Acessar'}</button>
 
           </form>
+
+          <Link href='/signUp' legacyBehavior>
+            <a>Não tem uma Conta? <strong style={{ color: '#00DFBF' }}>Crie uma agora mesmo!</strong></a>
+          </Link>
 
         </section>
 

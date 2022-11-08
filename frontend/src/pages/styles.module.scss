@@ -17,6 +17,7 @@
         color: #fff;
         font-size: 3vw;
         margin: 0 2rem;
+        font-weight: bold;
     }
 }
 
@@ -51,6 +52,10 @@
             font-size: 100%;
             font-weight: bold;
             color: #fff;
+        }
+
+        button[disabled]{
+            cursor: no-drop;
         }
 
     }
