@@ -1,10 +1,25 @@
 import { canSSRAuth } from "../../utils/canSSRAuth"
+import styles from './style.module.scss'
+import Menu from "../../components/Menu"
+import { useContext } from "react"
+import { AuthContext } from "../../contexts/AuthContext"
 
 export default function Dashboard() {
+
+
+
     return (
-        <div>
-            <h1>Minha Dash</h1>
-        </div>
+        <>
+            <div className={styles.dividerPage}>
+
+                <Menu />
+                <main className={styles.container}>
+                    <section>
+                        aqui vai o corpo do dashboard
+                    </section>
+                </main>
+            </div>
+        </>
     )
 }
 

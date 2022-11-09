@@ -1,0 +1,41 @@
+.container{
+    width: 30vw;
+    height: 100vh;
+    background-color: #232323;
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8% 0;
+    
+    div{
+        width: 90%;
+        height: 1px;
+        background-color: #fff;
+        margin-top: 8%;
+    }
+}
+
+.areaOptions{
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+
+    ul li a{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        
+        padding-left: 5%;
+        margin: 4% 0;
+        height: 40px;
+
+    }
+    ul li a:hover{
+        background-color: #3a3a3a;
+    }
+    
+}
