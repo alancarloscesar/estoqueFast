@@ -3,6 +3,7 @@ import Router from 'next/router';
 import { api } from '../services/apiClient'
 import { destroyCookie, setCookie, parseCookies } from 'nookies'
 import { toast } from 'react-hot-toast'
+import { setupAPIClient } from '../services/api';
 
 
 
@@ -43,7 +44,7 @@ export const AuthContext = createContext({} as AuthContextData)
 export function signOut() {
     try {
         destroyCookie(undefined, '@nextauth.token');
-        
+
         toast.success(`Até logo.`, {
             style: {
                 border: '1px solid #00DFBF',
@@ -67,30 +68,6 @@ export function signOut() {
 export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<UserProps>()
     const isAuthenticated = !!user;
-
-    //permanecendo login
-    // useEffect(() => {
-    //     const { '@nextauth.token': token } = parseCookies();
-    //     console.log(token)
-
-    //     if (token) {
-    //         api.get('/me').then(response => {//se der certo a requisição /me
-    //             const { id, name, email, access } = response.data;
-
-    //             setUser({
-    //                 id,
-    //                 name,
-    //                 email,
-    //                 access
-    //             })
-    //         })
-    //             .catch(() => {
-    //                 //se não der certo a requisição /me desloga e destroi o cookie
-    //                 signOut();//função que ja faz tudo isso
-    //             })
-    //     }
-    // }, [])
-
 
     async function signIn({ email, password }: SignInProps) {
         try {

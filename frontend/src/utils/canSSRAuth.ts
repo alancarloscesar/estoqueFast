@@ -5,7 +5,7 @@ import { AuthTokenError } from '../errors/AuthTokenError';
 
 //funcao para paginas que só users logados podem ter acesso.
 export function canSSRAuth<P>(fn: GetServerSideProps<P>) {
-    return async (ctx: GetServerSidePropsContext): Promise<GetServerSidePropsResult<P>> => {
+    return async (ctx: GetServerSidePropsContext): Promise<GetServerSidePropsResult<P> | undefined> => {
         const cookies = parseCookies(ctx);
 
         const token = cookies['@nextauth.token'];
@@ -24,7 +24,6 @@ export function canSSRAuth<P>(fn: GetServerSideProps<P>) {
         } catch (err) {
             if (err instanceof AuthTokenError) {
                 destroyCookie(ctx, '@nextauth.token');
-
                 return {
                     redirect: {
                         destination: '/',
@@ -33,6 +32,7 @@ export function canSSRAuth<P>(fn: GetServerSideProps<P>) {
                 }
 
             }
+
         }
 
 

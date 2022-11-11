@@ -19,11 +19,11 @@ export default function Menu() {
 
             <section className={styles.areaOptions}>
                 <ul>
-                    <li><Link href='/productEntry'><FiZap color='#fff' size={22} style={{ marginRight: '20%' }} />Dashboard</Link></li>
+                    <li><Link href='/dashboard'><FiZap color='#fff' size={22} style={{ marginRight: '20%' }} />Dashboard</Link></li>
                     <li><Link href='/productEntry'><FiTruck color='#fff' size={22} style={{ marginRight: '20%' }} />Entrada de Produtos</Link></li>
-                    <li><Link href='/productEntry'><FiGrid color='#fff' size={22} style={{ marginRight: '20%' }} />Categorias</Link></li>
-                    <li><Link href='/productEntry'><FiLayers color='#fff' size={22} style={{ marginRight: '20%' }} />Tamanhos</Link></li>
-                    <li><Link href='/productEntry'><FiBriefcase color='#fff' size={22} style={{ marginRight: '20%' }} />Produtos</Link></li>
+                    <li><Link href='/category'><FiGrid color='#fff' size={22} style={{ marginRight: '20%' }} />Categorias</Link></li>
+                    <li><Link href='/size'><FiLayers color='#fff' size={22} style={{ marginRight: '20%' }} />Tamanhos</Link></li>
+                    <li><Link href='/products'><FiBriefcase color='#fff' size={22} style={{ marginRight: '20%' }} />Produtos</Link></li>
                     <li onClick={() => signOut()}><Link href='#'><FiLogOut color='#fff' size={22} style={{ marginRight: '20%' }} />Sair</Link></li>
                 </ul>
             </section>

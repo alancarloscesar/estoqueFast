@@ -3,7 +3,7 @@ import Menu from "../../components/Menu"
 import styles from './style.module.scss'
 import { canSSRAuth } from "../../utils/canSSRAuth"
 
-export default function ProductEntry() {
+export default function Category() {
     return (
         <>
             <div className={styles.dividerPage}>
@@ -11,7 +11,7 @@ export default function ProductEntry() {
                 <Menu />
                 <main className={styles.container}>
                     <section>
-                        Entrada de produtos.
+                        Categoriasss
                     </section>
                 </main>
             </div>
