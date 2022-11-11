@@ -25,7 +25,7 @@ export function isAuthenticated(req: Request, res: Response, next: NextFunction)
             process.env.JWT_SECRET
         ) as Payload;
 
-        let request = req.query.user_id.toString()
+        let request = req.query.user_id
         request = sub;//criando variavel para pegar o id, devemo tipar
 
 

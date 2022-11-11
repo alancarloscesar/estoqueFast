@@ -69,6 +69,27 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<UserProps>()
     const isAuthenticated = !!user;
 
+    // useEffect(() => {
+    //     const { '@nextauth.token': token } = parseCookies();
+
+    //     if (token) {
+    //         api.get('/me').then(response => {//se der certo a requisição /me
+    //             const { id, name, email, access } = response.data;
+
+    //             setUser({
+    //                 id,
+    //                 name,
+    //                 email,
+    //                 access
+    //             })
+    //         })
+    //             .catch(() => {
+    //                 //se não der certo a requisição /me desloga e destroi o cookie
+    //                 signOut();//função que ja faz tudo isso
+    //             })
+    //     }
+    // }, [])
+
     async function signIn({ email, password }: SignInProps) {
         try {
             const response = await api.post('/session', {
