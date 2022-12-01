@@ -7,6 +7,7 @@ import { AuthController } from "./controllers/user/AuthController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
 
 import { createCategoryController } from "./controllers/category/createCategoryController";
+import { loadCategoryController } from "./controllers/category/loadCategoryController";
 
 const router = Router();
 
@@ -17,6 +18,7 @@ router.get('/me', isAuthenticated, new DetailUserController().handle)
 
 //ROTAS CATEGORY
 router.post('/category', isAuthenticated, new createCategoryController().handle)
+router.get('/loadCategory', isAuthenticated, new loadCategoryController().handle)
 
 export { router }
 

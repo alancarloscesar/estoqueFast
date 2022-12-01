@@ -1,11 +1,69 @@
-
-.dividerPage{
+.dividerPage {
     display: flex;
 }
 
-.container{
+.container {
     width: 75vw;
     height: 100vh;
 
+    padding: 0 8%;
+
     background-color: #e2e2e2;
+
+    hr{
+        margin: 10% 0;
+    }
+}
+
+.areaCategory {
+    padding: 2% 8%;
+    margin-top: 5%;
+    border: 1px solid #808080;
+    border-radius: 10px;
+    max-height: 40%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    hr{
+        height: 9vw;
+        width: 1px;
+        border: 0;
+        background-color: #808080;
+    }
+    
+    h2 {
+        color: #808080;
+        width: 40%;
+    }
+
+    input {
+        border: 0;
+        height: 2.5rem;
+        width: 100%;
+        border-radius: 1.25rem;
+        padding-left: 1rem;
+        font-size: 1em;
+        margin-top: .5rem;
+    }
+
+    button {
+        height: 2.5rem;
+        width: 100%;
+        border-radius: 1.25rem;
+        padding-left: 1rem;
+        margin-top: .5rem;
+        background-color: #00DFBF;
+        border: 0;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+
+    }
+
+    button:hover {
+        background-color: #04a18a;
+    }
 }

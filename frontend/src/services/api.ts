@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios, { AxiosError } from 'axios'
 import { parseCookies } from 'nookies'
-import { AuthTokenError } from '../errors/AuthTokenError'
+import { AuthTokenError } from './errors/AuthTokenError'
 
 import { signOut } from '../contexts/AuthContext'
 
@@ -8,24 +8,28 @@ export function setupAPIClient(ctx = undefined) {
     let cookies = parseCookies(ctx);
 
     const api = axios.create({
-        baseURL: 'http://localhost:3333/',//do back
+
+        baseURL: 'http://localhost:3333/',//do backend
         headers: {
-            Authorizarion: `Bearer ${cookies['@nextauth.token']}`
+            Authorization: `Bearer ${cookies['@nextauth.token']}`
         }
     })
 
     api.interceptors.response.use(response => {
         return response;
-    }, (error) => {
-        if (error.response.status === 401) {
+    }, (error: AxiosError) => {
+        if (error.response?.status === 401) {
+            // qualquer erro 401 (nao autorizado) devemos deslogar o usuario
             if (typeof window !== undefined) {
-                //chama a funcão de logout
+                // Chamar a funçao para deslogar o usuario
                 signOut();
             } else {
                 return Promise.reject(new AuthTokenError())
             }
         }
-        return Promise.reject(error)
+
+        return Promise.reject(error);
+
     })
 
     return api;
