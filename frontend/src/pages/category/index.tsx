@@ -70,21 +70,22 @@ export default function Category() {
                                 value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                                 placeholder="Categoria..."
+                                className={styles.inputs}
                             />
 
-                            <button type={"submit"}>Cadastrar</button>
+                            <button type={"submit"} className={styles.inputs}>Cadastrar</button>
                         </form>
                     </section>
 
-                    <hr />
-
                     <section className={styles.areaCategory}>
-                        <form onSubmit={handleAddSize}>
-                            <h2>Novo Tamanho</h2>
-                            <hr />
+                        <h2 className={styles.h2Size}>Novo Tamanho</h2>
+                        <hr />
 
+                        <form onSubmit={handleAddSize} className={styles.formSize}>
 
-                            <select /*value={categorySelected} onChange={handleChangeCategory} onClick={loadCategory}*/>
+                            <select /*value={categorySelected} onChange={handleChangeCategory} onClick={loadCategory}*/
+                                className={styles.inputsSize}>
+
                                 {
                                     loadCat.map((item, index) => {
                                         return (
@@ -100,15 +101,17 @@ export default function Category() {
                                 placeholder="Ex. Kg, pacote..."
                                 value={size}
                                 onChange={(e) => setSize(e.target.value)}
+                                className={styles.inputsSize}
                             />
 
-                            <input type="text"
-                                placeholder="Ex. 25"
+                            <input type="number"
+                                placeholder="preço... Ex. 25"
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
+                                className={styles.inputsSize}
                             />
 
-                            <button type={"submit"}>Cadastrar</button>
+                            <button type={"submit"} className={styles.inputsSize}>Cadastrar</button>
                         </form>
                     </section>
 
