@@ -11,6 +11,8 @@ import { loadCategoryController } from "./controllers/category/loadCategoryContr
 
 import { NewSizeCategoryController } from "./controllers/size/NewSizeCategoryController";
 
+import { NewProductController } from "./controllers/product/NewProductController";
+
 const router = Router();
 
 //rotas para user
@@ -24,6 +26,9 @@ router.get('/loadCategory', isAuthenticated, new loadCategoryController().handle
 
 //ROTAS SIZE
 router.post('/size', isAuthenticated, new NewSizeCategoryController().handle)
+
+//ROTAS PRODUCT
+router.post('/product', isAuthenticated, new NewProductController().handle)
 
 export { router }
 

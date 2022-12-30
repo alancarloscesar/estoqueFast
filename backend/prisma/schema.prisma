@@ -13,7 +13,7 @@ datasource db {
 //dados bd
 
 model User {
-  id       Int @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   name     String
   email    String
   password String
@@ -25,17 +25,19 @@ model User {
 }
 
 model Product {
-  id     Int @id @default(autoincrement())
+  id     Int     @id @default(autoincrement())
   name   String
   amount String
-  color  String
+  color  String  @default("Sem cor")
+  stock  Boolean @default(false)
+  measure String
 
   created_at DateTime? @default(now())
 
   category    Category @relation(fields: [category_id], references: [id])
   category_id Int
 
-  size    Size   @relation(fields: [size_id], references: [id])
+  size    Size @relation(fields: [size_id], references: [id])
   size_id Int
 
   sale_now SaleNow[]
@@ -44,25 +46,25 @@ model Product {
 }
 
 model Category {
-  id   Int @id @default(autoincrement())
+  id   Int    @id @default(autoincrement())
   name String
 
   created_at DateTime? @default(now())
   product    Product[] //ref produtos
-  size Size[]
+  size       Size[]
 
   @@map("categories")
 }
 
 model Size {
-  id    Int @id @default(autoincrement())
+  id    Int     @id @default(autoincrement())
   name  String
-  price Decimal @db.Decimal(9,2)
+  price Decimal @db.Decimal(9, 2)
 
   created_at DateTime? @default(now())
 
   category_id Int
-  category Category @relation(fields: [category_id], references: [id])
+  category    Category @relation(fields: [category_id], references: [id])
 
   product Product[]
 
@@ -70,7 +72,7 @@ model Size {
 }
 
 model SaleNow {
-  id        Int @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   date_sale DateTime @default(now())
   amount    Decimal
   price     Decimal
