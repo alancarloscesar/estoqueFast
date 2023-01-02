@@ -14,6 +14,7 @@ import { NewSizeCategoryController } from "./controllers/size/NewSizeCategoryCon
 import { NewProductController } from "./controllers/product/NewProductController";
 import { PaginationProductController } from "./controllers/product/PaginationProductController";
 import { UpdateProductController } from "./controllers/product/UpdateProductController";
+import { DeleteProductByIdController } from "./controllers/product/DeleteProductByIdProduct";
 
 const router = Router();
 
@@ -33,6 +34,8 @@ router.post('/size', isAuthenticated, new NewSizeCategoryController().handle)
 router.post('/product', isAuthenticated, new NewProductController().handle)
 router.get('/pagination', isAuthenticated, new PaginationProductController().handle)
 router.put('/product/update', isAuthenticated, new UpdateProductController().handle)
+router.delete('/product/delete', isAuthenticated, new DeleteProductByIdController().handle)
+
 
 export { router }
 
