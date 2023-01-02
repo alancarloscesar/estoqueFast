@@ -12,6 +12,7 @@ import { loadCategoryController } from "./controllers/category/loadCategoryContr
 import { NewSizeCategoryController } from "./controllers/size/NewSizeCategoryController";
 
 import { NewProductController } from "./controllers/product/NewProductController";
+import { PaginationProductController } from "./controllers/product/PaginationProductController";
 
 const router = Router();
 
@@ -29,6 +30,7 @@ router.post('/size', isAuthenticated, new NewSizeCategoryController().handle)
 
 //ROTAS PRODUCT
 router.post('/product', isAuthenticated, new NewProductController().handle)
+router.get('/pagination', isAuthenticated, new PaginationProductController().handle)
 
 export { router }
 

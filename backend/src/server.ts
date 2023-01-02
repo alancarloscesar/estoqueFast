@@ -25,5 +25,5 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {//midd
 })
 
 app.listen(3333, () => {
-    console.log("Servidor estoqueFast rodando...")
+    console.log("Servidor estoqueFast rodando... ")
 })
