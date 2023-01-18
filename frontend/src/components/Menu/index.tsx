@@ -23,6 +23,8 @@ export default function Menu() {
                     <li><Link href='/productEntry'><FiTruck color='#fff' size={22} style={{ marginRight: '20%' }} />Entrada de Produtos</Link></li>
                     <li><Link href='/category'><FiGrid color='#fff' size={22} style={{ marginRight: '20%' }} />Categorias / Tamanhos</Link></li>
                     <li><Link href='/products'><FiBriefcase color='#fff' size={22} style={{ marginRight: '20%' }} />Produtos</Link></li>
+                    <li><Link href='/products'><FiBriefcase color='#fff' size={22} style={{ marginRight: '20%' }} />Realizar Venda</Link></li>
+                    <li><Link href='/products'><FiBriefcase color='#fff' size={22} style={{ marginRight: '20%' }} />Financeiro</Link></li>
                     <li onClick={() => signOut()}><Link href='#'><FiLogOut color='#fff' size={22} style={{ marginRight: '20%' }} />Sair</Link></li>
                 </ul>
             </section>

@@ -67,6 +67,7 @@ model Size {
   category    Category @relation(fields: [category_id], references: [id])
 
   product Product[]
+  sales_now SaleNow[]
 
   @@map("sizes")
 }
@@ -74,11 +75,14 @@ model Size {
 model SaleNow {
   id        Int      @id @default(autoincrement())
   date_sale DateTime @default(now())
-  amount    Decimal
-  price     Decimal
+  amount    Decimal @db.Decimal(9, 2)
+  price     Decimal @db.Decimal(9, 2)
 
   product    Product @relation(fields: [product_id], references: [id])
   product_id Int
+
+  size Size @relation(fields: [size_id], references: [id])
+  size_id Int
 
   @@map("salesNow")
 }

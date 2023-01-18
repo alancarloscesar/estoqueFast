@@ -16,6 +16,8 @@ import { PaginationProductController } from "./controllers/product/PaginationPro
 import { UpdateProductController } from "./controllers/product/UpdateProductController";
 import { DeleteProductByIdController } from "./controllers/product/DeleteProductByIdProduct";
 
+import { SalesNowController } from "./controllers/sale_now/sales_now_controller";
+
 const router = Router();
 
 //rotas para user
@@ -35,6 +37,9 @@ router.post('/product', isAuthenticated, new NewProductController().handle)
 router.get('/pagination', isAuthenticated, new PaginationProductController().handle)
 router.put('/product/update', isAuthenticated, new UpdateProductController().handle)
 router.delete('/product/delete', isAuthenticated, new DeleteProductByIdController().handle)
+
+//ROTAS SALES NOW
+router.post('/sale', isAuthenticated, new SalesNowController().handle)
 
 
 export { router }
