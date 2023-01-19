@@ -13,6 +13,7 @@ export class SalesNowService {
 
     async execute({ amount, product_id, size_id }: SalesNowRequest) {
 
+        //busca dados para calcular o price no data
         const loadData = await prismaClient.product.findFirst({
             where: {
                 size_id
@@ -22,6 +23,7 @@ export class SalesNowService {
             }
         })
 
+        //cria uma venda no banco
         const sales = await prismaClient.saleNow.create({
 
             data: {
@@ -33,6 +35,16 @@ export class SalesNowService {
             include: {
                 size: {},
                 product: {}
+            }
+        })
+
+        //atualiza a quantidade de produtos subtraindo
+        await prismaClient.product.update({
+            where: {
+                id: product_id
+            },
+            data: {
+                amount: String(Number(sales.product.amount) - amount)
             }
         })
 

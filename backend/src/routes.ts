@@ -17,6 +17,7 @@ import { UpdateProductController } from "./controllers/product/UpdateProductCont
 import { DeleteProductByIdController } from "./controllers/product/DeleteProductByIdProduct";
 
 import { SalesNowController } from "./controllers/sale_now/sales_now_controller";
+import { CancelSaleController } from "./controllers/sale_now/cancelSaleController";
 
 const router = Router();
 
@@ -40,6 +41,7 @@ router.delete('/product/delete', isAuthenticated, new DeleteProductByIdControlle
 
 //ROTAS SALES NOW
 router.post('/sale', isAuthenticated, new SalesNowController().handle)
+router.delete('/cancel/sale', isAuthenticated, new CancelSaleController().handle)
 
 
 export { router }
