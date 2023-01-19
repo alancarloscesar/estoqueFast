@@ -1,4 +1,4 @@
-import { empty } from "@prisma/client/runtime";
+
 import prismaClient from "../../prisma";
 
 interface SalesNowRequest {
