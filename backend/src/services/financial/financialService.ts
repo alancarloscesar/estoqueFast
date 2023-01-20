@@ -13,25 +13,6 @@ export class FinancialService {
             throw new Error("Intervalo incorreto, verifique as datas.")
         }
 
-        if (initial_date === final_date) {
-            const sale_now_equals = await prismaClient.saleNow.findMany({
-                where: {
-                    AND: [
-                        {
-                            date_sale: {
-                                gte: new Date(initial_date),
-                                lte: addDays(new Date(final_date), 1)
-                            }
-                        }
-                    ]
-                },
-                orderBy: {
-                    id: 'asc'
-                }
-            })
-            return sale_now_equals;
-        }
-
         const sale_now = await prismaClient.saleNow.findMany({
             where: {
                 AND: [
