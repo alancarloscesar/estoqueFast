@@ -12,14 +12,12 @@ type CategorysProps = {
     name: string
 }
 
-export default function Category() {
+export default function Financial() {
 
     const [category, setCategory] = useState('')
     const [loadCat, setLoadCat] = useState<CategorysProps[]>([]);
-
     const [price, setPrice] = useState('')
     const [size, setSize] = useState('')
-    const [categorySeleted, setCategorySelected] = useState()
 
     const api = setupAPIClient();
 
@@ -35,55 +33,25 @@ export default function Category() {
     async function handleAddCategory(e: FormEvent) {
         e.preventDefault();
 
-        if (category === '') {
-            toast.error('Preencha o campo categoria.')
-            return;
-        }
+        try {
+            await api.post('/category', {
+                name: category
+            })
 
-        await api.post('/category', {
-            name: category
-        }).then(() => {
             toast.success("Categoria cadastrada!")
             setCategory("")
-        }).catch((error) => {
-            const err = error.response.data.errr
-            toast.error(`${err}`)
-        })
+        } catch (error) {
+            console.log("Erro ao cadastrar categoria: " + error)
+        }
     }
 
     async function handleAddSize(e: FormEvent) {
         e.preventDefault();
 
-        if (size === '' || price === '') {
-            toast.error('Preencha todos os campos.')
-            return;
-        }
-
-        await api.post('/size', {
-
-            name: size,
-            price: price,
-            category_id: loadCat[Number(categorySeleted)]?.id
-
-        }).then(() => {
-            toast.success("Tamanho cadastrado com sucesso!")
-            setPrice('');
-            setSize('')
-        }).catch((error) => {
-            const err = error.response.data.errr
-            toast.error(`${err}`)
-        });
+        console.log(typeof loadCat)
+        console.log(loadCat)
 
 
-
-
-
-
-    }
-
-    //selecionando categoria
-    function handleChangeCategory(event: React.ChangeEvent<HTMLSelectElement>) {
-        setCategorySelected(event.target.value)
     }
 
     return (
@@ -115,7 +83,7 @@ export default function Category() {
 
                         <form onSubmit={handleAddSize} className={styles.formSize}>
 
-                            <select value={categorySeleted} onChange={handleChangeCategory}
+                            <select /*value={categorySelected} onChange={handleChangeCategory} onClick={loadCategory}*/
                                 className={styles.inputsSize}>
 
                                 {
