@@ -21,6 +21,8 @@ import { CancelSaleController } from "./controllers/sale_now/cancelSaleControlle
 
 import { ProductEntryController } from "./controllers/product_entry/productEntryController";
 
+import { financialController } from "./controllers/finalcial/financialController";
+
 const router = Router();
 
 //rotas para user
@@ -47,6 +49,9 @@ router.delete('/cancel/sale', isAuthenticated, new CancelSaleController().handle
 
 //ROTAS PRODUCT ENTRY
 router.put('/product/entry', isAuthenticated, new ProductEntryController().handle)
+
+//ROTAS PARA O FINANCEIRO
+router.post('/financial', isAuthenticated, new financialController().handle)
 
 
 export { router }
