@@ -1,7 +1,7 @@
 import styles from './styles.module.scss'
 import Image from 'next/image'
 import logoImg from '../../../public/logoproject.png'
-import { FiZap, FiTruck, FiGrid, FiBriefcase, FiLayers, FiLogOut } from 'react-icons/fi'
+import { FiZap, FiTruck, FiGrid, FiBriefcase, FiDollarSign, FiLogOut,FiShoppingCart } from 'react-icons/fi'
 import Link from 'next/link'
 import { useContext } from 'react'
 import { AuthContext } from '../../contexts/AuthContext'
@@ -23,8 +23,8 @@ export default function Menu() {
                     <li><Link href='/productEntry'><FiTruck color='#fff' size={22} style={{ marginRight: '20%' }} />Entrada de Produtos</Link></li>
                     <li><Link href='/category'><FiGrid color='#fff' size={22} style={{ marginRight: '20%' }} />Categorias / Tamanhos</Link></li>
                     <li><Link href='/products'><FiBriefcase color='#fff' size={22} style={{ marginRight: '20%' }} />Produtos</Link></li>
-                    <li><Link href='/products'><FiBriefcase color='#fff' size={22} style={{ marginRight: '20%' }} />Realizar Venda</Link></li>
-                    <li><Link href='/products'><FiBriefcase color='#fff' size={22} style={{ marginRight: '20%' }} />Financeiro</Link></li>
+                    <li><Link href='/sale_now'><FiShoppingCart color='#fff' size={22} style={{ marginRight: '20%' }} />Realizar Venda</Link></li>
+                    <li><Link href='/financial'><FiDollarSign color='#fff' size={22} style={{ marginRight: '20%' }} />Financeiro</Link></li>
                     <li onClick={() => signOut()}><Link href='#'><FiLogOut color='#fff' size={22} style={{ marginRight: '20%' }} />Sair</Link></li>
                 </ul>
             </section>

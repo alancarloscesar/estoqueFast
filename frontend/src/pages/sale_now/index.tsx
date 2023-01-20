@@ -12,14 +12,12 @@ type CategorysProps = {
     name: string
 }
 
-export default function Category() {
+export default function SaleNow() {
 
     const [category, setCategory] = useState('')
     const [loadCat, setLoadCat] = useState<CategorysProps[]>([]);
-
     const [price, setPrice] = useState('')
     const [size, setSize] = useState('')
-    const [categorySeleted, setCategorySelected] = useState()
 
     const api = setupAPIClient();
 
@@ -50,32 +48,10 @@ export default function Category() {
     async function handleAddSize(e: FormEvent) {
         e.preventDefault();
 
+        console.log(typeof loadCat)
         console.log(loadCat)
-        console.log(`sleecioandaaa - ${categorySeleted}`)
-        console.log(`cat - ${loadCat[Number(categorySeleted)].name}`)
-
-        try {
-            await api.post('/size', {
-
-                name: size,
-                price: price,
-                category_id: loadCat[Number(categorySeleted)]?.id
-
-            })
-            toast.success("Tamanho cadastrado com sucesso!")
-            setPrice('');
-            setSize('')
-        } catch (error) {
-            console.log('Erro ao cadastrar tamanho.', error)
-        }
 
 
-
-    }
-
-    //selecionando categoria
-    function handleChangeCategory(event: React.ChangeEvent<HTMLSelectElement>) {
-        setCategorySelected(event.target.value)
     }
 
     return (
@@ -107,7 +83,7 @@ export default function Category() {
 
                         <form onSubmit={handleAddSize} className={styles.formSize}>
 
-                            <select value={categorySeleted} onChange={handleChangeCategory}
+                            <select /*value={categorySelected} onChange={handleChangeCategory} onClick={loadCategory}*/
                                 className={styles.inputsSize}>
 
                                 {
