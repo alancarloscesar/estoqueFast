@@ -73,12 +73,6 @@ export default function Category() {
             const err = error.response.data.errr
             toast.error(`${err}`)
         });
-
-
-
-
-
-
     }
 
     //selecionando categoria
