@@ -35,39 +35,47 @@ export default function Category() {
     async function handleAddCategory(e: FormEvent) {
         e.preventDefault();
 
-        try {
-            await api.post('/category', {
-                name: category
-            })
+        if (category === '') {
+            toast.error('Preencha o campo categoria.')
+            return;
+        }
 
+        await api.post('/category', {
+            name: category
+        }).then(() => {
             toast.success("Categoria cadastrada!")
             setCategory("")
-        } catch (error) {
-            console.log("Erro ao cadastrar categoria: " + error)
-        }
+        }).catch((error) => {
+            const err = error.response.data.errr
+            toast.error(`${err}`)
+        })
     }
 
     async function handleAddSize(e: FormEvent) {
         e.preventDefault();
 
-        console.log(loadCat)
-        console.log(`sleecioandaaa - ${categorySeleted}`)
-        console.log(`cat - ${loadCat[Number(categorySeleted)].name}`)
+        if (size === '' || price === '') {
+            toast.error('Preencha todos os campos.')
+            return;
+        }
 
-        try {
-            await api.post('/size', {
+        await api.post('/size', {
 
-                name: size,
-                price: price,
-                category_id: loadCat[Number(categorySeleted)]?.id
+            name: size,
+            price: price,
+            category_id: loadCat[Number(categorySeleted)]?.id
 
-            })
+        }).then(() => {
             toast.success("Tamanho cadastrado com sucesso!")
             setPrice('');
             setSize('')
-        } catch (error) {
-            console.log('Erro ao cadastrar tamanho.', error)
-        }
+        }).catch((error) => {
+            const err = error.response.data.errr
+            toast.error(`${err}`)
+        });
+
+
+
 
 
 
