@@ -1,11 +1,119 @@
-
-.dividerPage{
+.dividerPage {
     display: flex;
 }
 
-.container{
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     width: 75vw;
     height: 100vh;
 
     background-color: #e2e2e2;
+
+    h1 {
+        color: #3a3a3a;
+        margin-bottom: 2rem;
+        font-size: 3vw;
+    }
+
+    form {
+        width: 60vw;
+
+        label {
+            margin-left: 0.5rem;
+        }
+
+        padding: 2rem;
+        border: 1px solid #3a3a3a;
+        border-radius: 1rem;
+
+        input {
+            border: 0;
+            height: 2.5rem;
+            width: 100%;
+            border-radius: 1.25rem;
+            padding-left: 1rem;
+            font-size: 1em;
+            margin-top: .5rem;
+
+
+        }
+
+        .inputRowOne {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            .inputName {
+                width: 65%;
+            }
+
+            .inputColor {
+                width: 25%;
+            }
+        }
+
+        .inputRowTwo {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+            
+            .inputQtd {
+                width: 40%;
+            }
+            
+            .inputMeasure {
+                width: 30%;
+                margin: 0 4%;
+            }
+        }
+        
+        .selectsGroup{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 1rem 0;
+
+            select {
+                border: 0;
+                height: 2.5rem;
+                width: 47%;
+                border-radius: 1.25rem;
+                padding-left: 1rem;
+                font-size: 1em;
+                margin-top: .5rem;
+            }
+        }
+
+        button {
+            height: 2.5rem;
+            width: 30%;
+            border-radius: 1.25rem;
+            padding-left: 1rem;
+            margin-top: .5rem;
+            background-color: #00DFBF;
+            border: 0;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            
+        }
+    
+        button:hover {
+            background-color: #04a18a;
+        }
+
+
+    }
+    hr{
+        margin: 2rem 0;
+        background-color: #3a3a3a;
+    }
 }
