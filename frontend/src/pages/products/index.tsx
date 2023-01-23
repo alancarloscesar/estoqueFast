@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import Menu from "../../components/Menu"
 import styles from './style.module.scss'
 import { canSSRAuth } from "../../utils/canSSRAuth"
+import Switch from "react-switch";
 
 
 export default function Products() {
@@ -11,6 +12,13 @@ export default function Products() {
     const [qtd, setQtd] = useState('')
     const [cor, setCor] = useState('')
     const [uni_medida, setUniMedida] = useState('')
+    const [checked, setChecked] = useState(false)
+
+    function handleChange() {
+
+        setChecked(!checked)
+        console.log(checked)
+    }
 
     return (
         <>
@@ -51,8 +59,8 @@ export default function Products() {
                                 <input
                                     // value={category}
                                     // onChange={(e) => setCategory(e.target.value)}
-                                    placeholder="Quantidade atual em estoque..."
-
+                                    placeholder="Quantidade em estoque..."
+                                    type={"number"}
                                 />
                             </section>
 
@@ -66,17 +74,19 @@ export default function Products() {
                                 />
                             </section>
 
-                            <input
-                                // value={category}
-                                // onChange={(e) => setCategory(e.target.value)}
-                                placeholder="estoque sim ou não?..."
-                                className={styles.inputs}
-                                style={{ width: '22%', backgroundColor: '#ff0' }}
-                            />
+                            <label className={styles.switchArea}>
+                                <span>Estoque?</span>
+                                <Switch
+                                    onChange={handleChange}
+                                    checked={!checked}
+                                    onColor={'#00DFBF'}
+                                    borderRadius={1}
+                                />
+                            </label>
 
                         </section>
 
-                        <hr/>
+                        <hr />
 
                         <section className={styles.selects}>
                             <label>Selecione a categoria e tamanho:</label>
@@ -115,7 +125,9 @@ export default function Products() {
                         </section>
 
 
-                        <button type={"submit"} className={styles.inputs}>Cadastrar</button>
+                        <div className={styles.ButtonArea}>
+                            <button type={"submit"} className={styles.inputs}>Cadastrar</button>
+                        </div>
                     </form>
                 </main>
             </div>
