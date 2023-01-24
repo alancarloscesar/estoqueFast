@@ -10,6 +10,7 @@ import { createCategoryController } from "./controllers/category/createCategoryC
 import { loadCategoryController } from "./controllers/category/loadCategoryController";
 
 import { NewSizeCategoryController } from "./controllers/size/NewSizeCategoryController";
+import { LoadSizeByCategoryController } from "./controllers/size/LoadSizeByCategoryController";
 
 import { NewProductController } from "./controllers/product/NewProductController";
 import { PaginationProductController } from "./controllers/product/PaginationProductController";
@@ -36,6 +37,7 @@ router.get('/loadCategory', isAuthenticated, new loadCategoryController().handle
 
 //ROTAS SIZE
 router.post('/size', isAuthenticated, new NewSizeCategoryController().handle)
+router.get('/sizes/load', isAuthenticated, new LoadSizeByCategoryController().handle)
 
 //ROTAS PRODUCT
 router.post('/product', isAuthenticated, new NewProductController().handle)

@@ -1,9 +1,21 @@
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, FormEvent } from "react"
 import Menu from "../../components/Menu"
 import styles from './style.module.scss'
 import { canSSRAuth } from "../../utils/canSSRAuth"
+import Switch from "react-switch";
+import { api } from "../../services/apiClient";
+import { toast } from "react-hot-toast";
 
+interface CategoryProps {
+    name: string;
+    id: number;
+}
+interface SizeProps {
+    name: string;
+    id: number;
+    price: number;
+}
 
 export default function Products() {
 
@@ -11,6 +23,80 @@ export default function Products() {
     const [qtd, setQtd] = useState('')
     const [cor, setCor] = useState('')
     const [uni_medida, setUniMedida] = useState('')
+    const [checked, setChecked] = useState(true)
+
+    const [category, setCategory] = useState<CategoryProps[]>([])
+    const [categorySelected, setCategorySelected] = useState(0)
+
+    const [size, setSize] = useState<SizeProps[]>([])
+    const [sizeSelected, setSizeSelected] = useState(0)
+
+    useEffect(() => {
+        async function loadCategories() {
+            const response = await api.get('/loadCategory');
+            setCategory(response.data)
+        }
+        loadCategories();
+    }, [])
+
+    async function loadSize() {
+        try {
+            const response = await api.get('/sizes/load', {
+                params: {
+                    category_id: Number(category[categorySelected]?.id)
+                }
+            })
+
+            setSize(response.data)
+        } catch (error) {
+            console.log('Erro ao buscar tamanhos...', error)
+        }
+
+    }
+
+    useEffect(() => {
+        loadSize();
+    })
+
+    //selecionando categoria
+    function handleChangeCategory(event: React.ChangeEvent<HTMLSelectElement>) {
+        setCategorySelected(event.target.value)
+    }
+
+    //selecionando size
+    function handleChangeSize(event: React.ChangeEvent<HTMLSelectElement>) {
+        setSizeSelected(event.target.value)
+    }
+
+
+    function handleChange() {
+
+        setChecked(!checked)
+    }
+
+    async function handleAddProduct(e: FormEvent) {
+        e.preventDefault();
+
+        const response = await api.post('/product', {
+            name: name.toUpperCase(),
+            amount: checked ? qtd : 'null',
+            color: cor.toUpperCase(),
+            stock: checked,
+            measure: uni_medida.toUpperCase(),
+            category_id: category[categorySelected]?.id,
+            size_id: size[sizeSelected]?.id
+        }).then(() => {
+            toast.success('Produto cadastrado com sucesso.')
+
+            setName('');
+            setQtd('');
+            setCor('');
+            setUniMedida('');
+        }).catch((error) => {
+            toast.error(error.response.data.errr)
+            return;
+        })
+    }
 
     return (
         <>
@@ -22,13 +108,13 @@ export default function Products() {
                         Cadastro de produtos
                     </h1>
 
-                    <form>
+                    <form onSubmit={handleAddProduct}>
                         <section className={styles.inputRowOne}>
                             <section className={styles.inputName}>
                                 <label>Nome:</label>
                                 <input
-                                    // value={category}
-                                    // onChange={(e) => setCategory(e.target.value)}
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
                                     placeholder="Nome..."
 
                                 />
@@ -37,8 +123,8 @@ export default function Products() {
                             <section className={styles.inputColor}>
                                 <label>Cor:</label>
                                 <input
-                                    // value={category}
-                                    // onChange={(e) => setCategory(e.target.value)}
+                                    value={cor}
+                                    onChange={(e) => setCor(e.target.value)}
                                     placeholder="Cor..."
 
                                 />
@@ -49,73 +135,76 @@ export default function Products() {
                             <section className={styles.inputQtd}>
                                 <label>Qtd:</label>
                                 <input
-                                    // value={category}
-                                    // onChange={(e) => setCategory(e.target.value)}
-                                    placeholder="Quantidade atual em estoque..."
-
+                                    disabled={checked ? false : true}
+                                    style={{ cursor: checked ? "text" : "not-allowed" }}
+                                    value={qtd}
+                                    onChange={(e) => setQtd(e.target.value)}
+                                    placeholder="Quantidade em estoque..."
+                                    type={"number"}
                                 />
                             </section>
 
                             <section className={styles.inputMeasure}>
                                 <label>Unidade de medida:</label>
                                 <input
-                                    // value={category}
-                                    // onChange={(e) => setCategory(e.target.value)}
+                                    value={uni_medida}
+                                    onChange={(e) => setUniMedida(e.target.value)}
                                     placeholder="Pacote, Kg..."
 
                                 />
                             </section>
 
-                            <input
-                                // value={category}
-                                // onChange={(e) => setCategory(e.target.value)}
-                                placeholder="estoque sim ou não?..."
-                                className={styles.inputs}
-                                style={{ width: '22%', backgroundColor: '#ff0' }}
-                            />
+                            <label className={styles.switchArea} >
+                                <span style={{ fontWeight: "bold" }}>Estoque?</span>
+                                <Switch
+                                    onChange={handleChange}
+                                    checked={checked}
+                                    onColor={'#00DFBF'}
+                                    borderRadius={1}
+                                />
+                            </label>
 
                         </section>
 
-                        <hr/>
+                        <hr />
 
                         <section className={styles.selects}>
                             <label>Selecione a categoria e tamanho:</label>
                             <section className={styles.selectsGroup}>
                                 <select
-                                    // value={categorySeleted} onChange={handleChangeCategory}
+                                    value={categorySelected}
+                                    onChange={handleChangeCategory}
                                     className={styles.inputsSize}>
-                                    <option value="">categoria 1</option>
-                                    <option value="">categoria 2</option>
-                                    {/* {
-                                        loadCat.map((item, index) => {
+                                    {
+                                        category.map((item, index) => {
                                             return (
                                                 <option key={item.id} value={index}>
                                                     {item.name}
                                                 </option>
                                             )
                                         })
-                                    } */}
+                                    }
                                 </select>
                                 <select
-                                    // value={categorySeleted} onChange={handleChangeCategory}
+                                    value={sizeSelected} onChange={handleChangeSize}
                                     className={styles.inputsSize}>
-                                    <option value="">tamanho 1</option>
-                                    <option value="">tamanho 2</option>
-                                    {/* {
-                                        loadCat.map((item, index) => {
+                                    {
+                                        size.map((item, index) => {
                                             return (
                                                 <option key={item.id} value={index}>
                                                     {item.name}
                                                 </option>
                                             )
                                         })
-                                    } */}
+                                    }
                                 </select>
                             </section>
                         </section>
 
 
-                        <button type={"submit"} className={styles.inputs}>Cadastrar</button>
+                        <div className={styles.ButtonArea}>
+                            <button type={"submit"} className={styles.inputs}>Cadastrar</button>
+                        </div>
                     </form>
                 </main>
             </div>
