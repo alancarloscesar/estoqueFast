@@ -22,6 +22,10 @@ class NewProductService {
             }
         })
 
+        if(name === '' || measure === '' || color === ''){
+            throw new Error('Os campos NOME, COR e UNIDADE DE MEDIDA são obrigatórios.')
+        }
+
         if (productExist) {
             throw new Error("Este produto já foi cadastrado na base dados.")
         }

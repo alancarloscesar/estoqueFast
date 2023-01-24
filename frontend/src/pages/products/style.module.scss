@@ -23,7 +23,7 @@
     background-color: #e2e2e2;
 
     h1 {
-        color: #3a3a3a;
+        color: #5a5959;
         margin-bottom: 2rem;
         font-size: 3vw;
     }
@@ -36,7 +36,7 @@
         }
 
         padding: 2rem;
-        border: 1px solid #3a3a3a;
+        border: 1px solid #b1b1b1;
         border-radius: 1rem;
 
         input {
@@ -111,30 +111,25 @@
 
         .ButtonArea {
             display: flex;
-            justify-content: end;
+            justify-content: flex-end;
             width: 100%;
 
             button {
-
                 height: 2.5rem;
-                width: 30%;
+                width: 25%;
                 border-radius: 1.25rem;
-                padding-left: 1rem;
                 margin-top: .9rem;
                 background-color: #00DFBF;
                 border: 0;
                 color: #fff;
                 font-size: 16px;
                 font-weight: bold;
-
             }
 
             button:hover {
                 background-color: #04a18a;
             }
         }
-
-
     }
 
     hr {
