@@ -26,10 +26,10 @@ export default function Products() {
     const [checked, setChecked] = useState(true)
 
     const [category, setCategory] = useState<CategoryProps[]>([])
-    const [categorySelected, setCategorySelected] = useState(0)
+    const [categorySelected, setCategorySelected] = useState('0')
 
     const [size, setSize] = useState<SizeProps[]>([])
-    const [sizeSelected, setSizeSelected] = useState(0)
+    const [sizeSelected, setSizeSelected] = useState('0')
 
     useEffect(() => {
         async function loadCategories() {
@@ -43,7 +43,7 @@ export default function Products() {
         try {
             const response = await api.get('/sizes/load', {
                 params: {
-                    category_id: Number(category[categorySelected]?.id)
+                    category_id: Number(category[Number(categorySelected)]?.id)
                 }
             })
 
@@ -83,8 +83,8 @@ export default function Products() {
             color: cor.toUpperCase(),
             stock: checked,
             measure: uni_medida.toUpperCase(),
-            category_id: category[categorySelected]?.id,
-            size_id: size[sizeSelected]?.id
+            category_id: category[Number(categorySelected)]?.id,
+            size_id: size[Number(sizeSelected)]?.id
         }).then(() => {
             toast.success('Produto cadastrado com sucesso.')
 
