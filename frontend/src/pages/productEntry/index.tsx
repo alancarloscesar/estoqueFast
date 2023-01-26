@@ -11,6 +11,10 @@ interface ProductProps {
     color: string;
     amount: number;
     measure: string;
+    size: {
+        price: number;
+        name: string;
+    }
 }
 
 export default function ProductEntry() {
@@ -18,10 +22,9 @@ export default function ProductEntry() {
     const [search, setSearch] = useState('');
     const [skip, setSkip] = useState(0)
     const [take, settake] = useState(5)
-    const [cont, setCont] = useState(1)
-
 
     const [dataProduct, setDataProduct] = useState<ProductProps[]>([])
+    const [dataRowTable, setdataRowTable] = useState<ProductProps>()
 
     async function pagination() {
         const response = await api.get('/pagination', {
@@ -77,6 +80,10 @@ export default function ProductEntry() {
         return;
     }
 
+    function handleRowTable(item: ProductProps) {
+        setdataRowTable(item)
+    }
+
     return (
         <>
             <div className={styles.dividerPage}>
@@ -108,6 +115,8 @@ export default function ProductEntry() {
                                     <th>COR</th>
                                     <th>ESTOQUE</th>
                                     <th>UNIDADE DE MEDIDA</th>
+                                    <th>TAMANHO</th>
+                                    <th>PREÇO</th>
                                     <th>AÇÃO</th>
                                 </tr>
                             </thead>
@@ -121,7 +130,9 @@ export default function ProductEntry() {
                                                 <td>{item.color}</td>
                                                 <td>{item.amount}</td>
                                                 <td>{item.measure}</td>
-                                                <td><button>Editar</button></td>
+                                                <td>{item.size.name}</td>
+                                                <td>{`R$ ${item.size.price}`}</td>
+                                                <td><button onClick={() => handleRowTable(item)}>Editar</button></td>
                                             </tr>
                                         )
                                     })
@@ -137,6 +148,59 @@ export default function ProductEntry() {
                         > anterior </button>
                         <button onClick={takeAcitionNext}> proximo </button>
                     </div>
+
+                    <div>
+                        <label>ID: </label>
+                        <span>{dataRowTable?.id}</span>
+                        <br />
+
+                        <label>NOME: </label>
+                        <span>{dataRowTable?.name}</span>
+                        <br />
+
+                        <label>COR: </label>
+                        <span>{dataRowTable?.color}</span>
+                        <br />
+
+                        <label>ESTOQUE: </label>
+                        <span>{dataRowTable?.amount}</span>
+                        <br />
+
+                        <label>UNIDADE DE MEDIDA: </label>
+                        <span>{dataRowTable?.measure}</span>
+                        <br />
+
+                        <label>TAMANHO: </label>
+                        <span>{dataRowTable?.size.name}</span>
+                        <br />
+
+                        <label>PREÇO: </label>
+                        <span>{`R$ ${dataRowTable?.size.price}`}</span>
+                        <br />
+                    </div>
+
+                    <div>
+                        <h2>Aqui você atualize a entrada de produtos.</h2>
+                        <form>
+                            <label>Quantidade: </label>
+                            <input
+                                placeholder="Nova Quantidade..."
+                                value={'1234'}//aqui vai o value original
+                                type={"number"}
+                            />
+
+                            <label>Preço: </label>
+                            <input
+                                placeholder="Novo Preço..."
+                                value={'1234'}//aqui vai o value original
+                                type={"number"}
+                            />
+
+                            <button type="submit">Atualizar</button>
+                        </form>
+                    </div>
+
+
 
                 </main>
 

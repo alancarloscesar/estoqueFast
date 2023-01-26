@@ -19,6 +19,9 @@ class PaginationProductService {
             },
             orderBy: {
                 id: "asc"
+            },
+            include: {
+                size: {}
             }
         })
         return pagination;
