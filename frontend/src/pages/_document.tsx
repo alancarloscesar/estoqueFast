@@ -6,7 +6,7 @@ export default function Document() {
 
         <Html>
             <Head>
-                <title>FastEstock</title>
+                <title>FastStock</title>
             </Head>
             <body>
                 <Main />

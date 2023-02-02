@@ -12,6 +12,7 @@ interface ProductProps {
     amount: number;
     measure: string;
     size: {
+        id: number;
         price: number;
         name: string;
     }
@@ -25,6 +26,10 @@ export default function ProductEntry() {
 
     const [dataProduct, setDataProduct] = useState<ProductProps[]>([])
     const [dataRowTable, setdataRowTable] = useState<ProductProps>()
+
+    //dados para serem alterados
+    const [amountAfter, setAmountAfter] = useState('')
+    const [priceAfter, setPriceAfter] = useState<Number>()
 
     async function pagination() {
         const response = await api.get('/pagination', {
@@ -82,6 +87,25 @@ export default function ProductEntry() {
 
     function handleRowTable(item: ProductProps) {
         setdataRowTable(item)
+    }
+
+    const handleUpdateProductEntry = async (e: FormEvent) => {
+        e.preventDefault();
+
+        await api.put('/product/entry', {
+            // params: {
+                product_id: Number(dataRowTable?.id),
+                size_id: Number(dataRowTable?.size.price),
+            // },
+            amount_new: Number(amountAfter),
+            price_new: Number(priceAfter)
+        }).then(() => {
+            alert(`Atualizado com sucesso.`)
+        }).catch((err) => {
+
+            console.log(err.response.data.errr)
+        })
+
     }
 
     return (
@@ -181,18 +205,20 @@ export default function ProductEntry() {
 
                     <div>
                         <h2>Aqui você atualize a entrada de produtos.</h2>
-                        <form>
+                        <form onSubmit={handleUpdateProductEntry}>
                             <label>Quantidade: </label>
                             <input
                                 placeholder="Nova Quantidade..."
-                                value={'1234'}//aqui vai o value original
+                                value={amountAfter}//aqui vai o value original
+                                onChange={(e) => setAmountAfter(e.target.value)}
                                 type={"number"}
                             />
 
                             <label>Preço: </label>
                             <input
                                 placeholder="Novo Preço..."
-                                value={'1234'}//aqui vai o value original
+                                value={Number(priceAfter)}//aqui vai o value original
+                                onChange={(e) => setPriceAfter(Number(e.target.value))}
                                 type={"number"}
                             />
 
