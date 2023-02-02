@@ -23,11 +23,11 @@ export class ProductEntryService {
                 id: Number(product_id)
             },
             data: {
-                amount: String(Number(loadData.amount) + amount_new)
+                amount: Number(loadData.amount) + Number(amount_new)
             }
         })
 
-        await prismaClient.size.update({
+        const updateSize = await prismaClient.size.update({
             where: {
                 id: Number(size_id)
             },
@@ -36,6 +36,6 @@ export class ProductEntryService {
             }
         })
 
-        return updateAmountProduct;
+        return updateSize;
     }
 }
