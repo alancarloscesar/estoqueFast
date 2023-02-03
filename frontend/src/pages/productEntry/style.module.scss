@@ -12,10 +12,9 @@
 .searchArea {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    padding: 5% 0;
-    // background-color: #cc2626;
-
+    justify-content: space-between;
+    padding: 5%;
+    // width: 90%;
     p {
         font-size: 3vw;
         color: #5a5959;
@@ -26,22 +25,24 @@
         flex-direction: row;
 
         input {
-            width: 25vw;
-            height: 100%;
+            width: 15vw;
+            height: 80%;
             font-size: 16px;
             padding-left: 5%;
-            border-radius: 15vw;
+            // border-radius: 15vw;
+            border-top-left-radius: 15vw;
+            border-bottom-left-radius: 15vw;
             border: 0;
+            // margin-right: -15%;
         }
 
         button {
-            height: 100%;
-            width: 5vw;
+            height: 80%;
+            width: 4vw;
             border-radius: 3vw;
             border-bottom-left-radius: 0vw;
             border-top-left-radius: 0vw;
             border: 0;
-            margin-left: -15%;
             background-color: #00DFBF;
         }
 
@@ -53,18 +54,19 @@
 }
 
 .tableArea {
-    background-color: #00DFBF;
+    // background-color: #00DFBF;
     min-height: 40vh;
 
     table,
     th,
     td {
-        border: 1px solid black;
+        border: 1px solid #212121;
     }
 
     table {
         border-collapse: collapse;
         margin: auto;
+        width: 90%;
     }
 
     th,
@@ -80,11 +82,35 @@
 
 
     tr:nth-child(even) {
-        background-color: #DCEBE6;
+        background-color: #cccccc;
     }
 
     tr:hover:nth-child(1n + 2) {
-        background-color: #085F63;
+        background-color: #999999;
         color: #fff;
+    }
+}
+
+.btnEditTableRow{
+    border: 0;
+    color: #fff;
+    background-color: #232323;
+    padding: 5%;
+    width: 60%;
+    border-radius: 5%;
+}
+
+.btnsPaginationPreviousNext{
+    margin: 1% 5%;
+    width: 90%;
+
+    button{
+        margin-right: 2%;
+        border: 0;
+        background-color: #999999;
+        width: 5%;
+    }
+    button:hover{
+        background-color: #232323;
     }
 }

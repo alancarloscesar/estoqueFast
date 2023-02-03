@@ -5,7 +5,7 @@ import { canSSRAuth } from "../../utils/canSSRAuth"
 import { FormEvent, useState } from 'react'
 import { api } from "../../services/apiClient"
 import { toast } from "react-hot-toast"
-import { FiSearch } from "react-icons/fi"
+import { FiSearch, FiEdit, FiArrowLeft, FiArrowRight } from "react-icons/fi"
 
 interface ProductProps {
     id: number;
@@ -133,7 +133,7 @@ export default function ProductEntry() {
                                 placeholder="Pesquise um produto..."
                             />
                             <button type="submit" onClick={searchProduct}>
-                                <FiSearch size={40} color='#fff' />
+                                <FiSearch size={25} color='#fff' />
                             </button>
                         </form>
                     </section>
@@ -164,7 +164,14 @@ export default function ProductEntry() {
                                                 <td>{item.measure}</td>
                                                 <td>{item.size.name}</td>
                                                 <td>{`R$ ${item.size.price}`}</td>
-                                                <td><button onClick={() => handleRowTable(item)}>Editar</button></td>
+                                                <td>
+                                                    <button
+                                                        onClick={() => handleRowTable(item)}
+                                                        className={styles.btnEditTableRow}
+                                                    >
+                                                        <FiEdit size={25} color='#fff' />
+                                                    </button>
+                                                </td>
                                             </tr>
                                         )
                                     })
@@ -172,13 +179,16 @@ export default function ProductEntry() {
                             </tbody>
                         </table>
 
-                        <br></br>
-                        <br></br>
-                        <button
-                            onClick={takeAcitionPrevious}
-                            style={{ marginRight: 50, marginLeft: 50 }}
-                        > anterior </button>
-                        <button onClick={takeAcitionNext}> proximo </button>
+                        <section className={styles.btnsPaginationPreviousNext}>
+
+                            <button onClick={takeAcitionPrevious}>
+                                <FiArrowLeft size={'2vw'} color='#fff' />
+                            </button>
+
+                            <button onClick={takeAcitionNext}>
+                                <FiArrowRight size={'2vw'} color='#fff' />
+                            </button>
+                        </section>
                     </div>
 
                     <div>
