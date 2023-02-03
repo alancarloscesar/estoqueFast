@@ -4,6 +4,8 @@ import styles from './style.module.scss'
 import { canSSRAuth } from "../../utils/canSSRAuth"
 import { FormEvent, useState } from 'react'
 import { api } from "../../services/apiClient"
+import { toast } from "react-hot-toast"
+import { FiSearch } from "react-icons/fi"
 
 interface ProductProps {
     id: number;
@@ -29,7 +31,7 @@ export default function ProductEntry() {
 
     //dados para serem alterados
     const [amountAfter, setAmountAfter] = useState('')
-    const [priceAfter, setPriceAfter] = useState<Number>()
+    const [priceAfter, setPriceAfter] = useState('')
 
     async function pagination() {
         const response = await api.get('/pagination', {
@@ -92,20 +94,24 @@ export default function ProductEntry() {
     const handleUpdateProductEntry = async (e: FormEvent) => {
         e.preventDefault();
 
+        if (amountAfter === '' || priceAfter === '') {
+            toast.error('campos QUANTIDADE e PREÇO não podem ficar VAZIOS');
+            return;
+        }
+
         await api.put('/product/entry', {
-            // params: {
-                product_id: Number(dataRowTable?.id),
-                size_id: Number(dataRowTable?.size.price),
-            // },
+
+            product_id: Number(dataRowTable?.id),
+            size_id: Number(dataRowTable?.size.id),
             amount_new: Number(amountAfter),
             price_new: Number(priceAfter)
-        }).then(() => {
-            alert(`Atualizado com sucesso.`)
-        }).catch((err) => {
 
+        }).then((res) => {
+            toast.success(res.data.Updated);
+            pagination();
+        }).catch((err) => {
             console.log(err.response.data.errr)
         })
-
     }
 
     return (
@@ -114,23 +120,25 @@ export default function ProductEntry() {
 
                 <Menu />
                 <main className={styles.container}>
-                    <section>
-                        Entrada de produtos.
+                    <section className={styles.searchArea}>
+                        <p>
+                            Entrada de produtos
+                        </p>
+
+                        <form onSubmit={searchProduct}>
+                            <input
+                                type={"search"}
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                placeholder="Pesquise um produto..."
+                            />
+                            <button type="submit" onClick={searchProduct}>
+                                <FiSearch size={40} color='#fff' />
+                            </button>
+                        </form>
                     </section>
 
-                    <form onSubmit={searchProduct}>
-                        <input
-                            type={"search"}
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                        />
-                        <button type="submit" onClick={searchProduct}>Search</button>
-                    </form>
-
-                    <br></br>
-                    <br></br>
-
-                    <div>
+                    <div className={styles.tableArea}>
                         <table border={1}>
                             <thead>
                                 <tr>
@@ -217,8 +225,8 @@ export default function ProductEntry() {
                             <label>Preço: </label>
                             <input
                                 placeholder="Novo Preço..."
-                                value={Number(priceAfter)}//aqui vai o value original
-                                onChange={(e) => setPriceAfter(Number(e.target.value))}
+                                value={priceAfter}//aqui vai o value original
+                                onChange={(e) => setPriceAfter(e.target.value)}
                                 type={"number"}
                             />
 
