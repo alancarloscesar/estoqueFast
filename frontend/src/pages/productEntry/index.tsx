@@ -33,6 +33,8 @@ export default function ProductEntry() {
     const [amountAfter, setAmountAfter] = useState('')
     const [priceAfter, setPriceAfter] = useState('')
 
+    const [dataProductsVisible, setdataProductsVisible] = useState(false)
+
     async function pagination() {
         const response = await api.get('/pagination', {
             params: {
@@ -89,6 +91,7 @@ export default function ProductEntry() {
 
     function handleRowTable(item: ProductProps) {
         setdataRowTable(item)
+        setdataProductsVisible(true)
     }
 
     const handleUpdateProductEntry = async (e: FormEvent) => {
@@ -191,58 +194,61 @@ export default function ProductEntry() {
                         </section>
                     </div>
 
-                    <div>
-                        <label>ID: </label>
-                        <span>{dataRowTable?.id}</span>
-                        <br />
+                    {
+                        dataProductsVisible && (
 
-                        <label>NOME: </label>
-                        <span>{dataRowTable?.name}</span>
-                        <br />
+                            <div className={styles.datasProducts}>
+                                <label>ID: </label>
+                                <span>{dataRowTable?.id}</span>
 
-                        <label>COR: </label>
-                        <span>{dataRowTable?.color}</span>
-                        <br />
+                                <label>NOME: </label>
+                                <span>{dataRowTable?.name}</span>
 
-                        <label>ESTOQUE: </label>
-                        <span>{dataRowTable?.amount}</span>
-                        <br />
+                                <label>COR: </label>
+                                <span>{dataRowTable?.color}</span>
 
-                        <label>UNIDADE DE MEDIDA: </label>
-                        <span>{dataRowTable?.measure}</span>
-                        <br />
+                                <label>ESTOQUE: </label>
+                                <span>{dataRowTable?.amount}</span>
 
-                        <label>TAMANHO: </label>
-                        <span>{dataRowTable?.size.name}</span>
-                        <br />
+                                <label>UNIDADE DE MEDIDA: </label>
+                                <span>{dataRowTable?.measure}</span>
 
-                        <label>PREÇO: </label>
-                        <span>{`R$ ${dataRowTable?.size.price}`}</span>
-                        <br />
-                    </div>
+                                <label>TAMANHO: </label>
+                                <span>{dataRowTable?.size.name}</span>
 
-                    <div>
-                        <h2>Aqui você atualize a entrada de produtos.</h2>
-                        <form onSubmit={handleUpdateProductEntry}>
-                            <label>Quantidade: </label>
-                            <input
-                                placeholder="Nova Quantidade..."
-                                value={amountAfter}//aqui vai o value original
-                                onChange={(e) => setAmountAfter(e.target.value)}
-                                type={"number"}
-                            />
+                                <label>PREÇO: </label>
+                                <span>{`R$ ${dataRowTable?.size.price}`}</span>
+                            </div>
+                        )
+                    }
 
-                            <label>Preço: </label>
-                            <input
-                                placeholder="Novo Preço..."
-                                value={priceAfter}//aqui vai o value original
-                                onChange={(e) => setPriceAfter(e.target.value)}
-                                type={"number"}
-                            />
 
-                            <button type="submit">Atualizar</button>
-                        </form>
-                    </div>
+                    {
+                        dataProductsVisible && (
+                            <div className={styles.editDataProduct}>
+                                <p>Entrada de produtos.</p>
+                                <form onSubmit={handleUpdateProductEntry}>
+                                    <label>Quantidade: </label>
+                                    <input
+                                        placeholder="Nova Quantidade..."
+                                        value={amountAfter}//aqui vai o value original
+                                        onChange={(e) => setAmountAfter(e.target.value)}
+                                        type={"number"}
+                                    />
+
+                                    <label>Preço: </label>
+                                    <input
+                                        placeholder="Novo Preço..."
+                                        value={priceAfter}//aqui vai o value original
+                                        onChange={(e) => setPriceAfter(e.target.value)}
+                                        type={"number"}
+                                    />
+
+                                    <button type="submit">Atualizar</button>
+                                </form>
+                            </div>
+                        )
+                    }
 
 
 
