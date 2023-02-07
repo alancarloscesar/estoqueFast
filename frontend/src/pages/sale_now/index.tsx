@@ -35,6 +35,10 @@ export default function SaleNow() {
 
     const [dataProductsVisible, setdataProductsVisible] = useState(false)
 
+    const [selectPayment, setSelectPayment] = useState('')
+    const [selectCard, setSelectCard] = useState('')
+    const [selectInstallment, setSelectInstallment] = useState('')
+
     async function pagination() {
         const response = await api.get('/pagination', {
             params: {
@@ -89,6 +93,10 @@ export default function SaleNow() {
     function handleRowTable(item: ProductProps) {
         setdataRowTable(item)
         setdataProductsVisible(true)
+    }
+
+    function paymentCard() {
+        console.log(selectPayment)
     }
 
 
@@ -223,19 +231,54 @@ export default function SaleNow() {
                                         type={"number"}
                                     />
 
-                                    <label>Preço: </label>
-                                    <input
-                                        placeholder="Novo Preço..."
-                                        value={priceAfter}//aqui vai o value original
-                                        onChange={(e) => setPriceAfter(e.target.value)}
-                                        type={"number"}
-                                    />
+                                    <label>Pagamento: </label>
+                                    <select name="" id=""
+                                        onChange={e => setSelectPayment(e.target.value)}
+                                    >
+                                        <option value="dinheiro">Dinheiro</option>
+                                        <option value="cartao" onClick={paymentCard}>Cartão</option>
+                                        <option value="pix">Pix</option>
+                                    </select>
 
-                                    <button type="submit">Atualizar</button>
+                                    {
+                                        selectPayment === 'cartao' && (
+                                            <select name="" id=""
+                                                onChange={e => setSelectCard(e.target.value)}
+                                            >
+                                                <option value="debito">Débito</option>
+                                                <option value="credito">Crédito</option>
+                                            </select>
+                                        )
+                                    }
+
+                                    {
+                                        selectCard === 'credito' && (
+                                            <select name="" id=""
+                                                onChange={e => setSelectInstallment(e.target.value)}
+                                            >
+                                                <option value="1">1x</option>
+                                                <option value="2">2x</option>
+                                                <option value="3">3x</option>
+                                                <option value="4">4x</option>
+                                                <option value="5">5x</option>
+                                                <option value="6">6x</option>
+                                                <option value="7">7x</option>
+                                                <option value="8">8x</option>
+                                                <option value="9">9x</option>
+                                                <option value="10">10x</option>
+                                                <option value="11">11x</option>
+                                                <option value="12">12x</option>
+                                            </select>
+                                        )
+                                    }
+
+                                    <button type="submit">Finalizar</button>
                                 </form>
                             </div>
                         )
                     }
+
+                    <p className={styles.priceTotal}>50,00 R$</p>
 
 
 
