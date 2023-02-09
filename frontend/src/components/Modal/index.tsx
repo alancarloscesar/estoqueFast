@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ReactModal from "react-modal";
+import styles from './styles.module.scss'
 
 export default function Modal() {
 
@@ -37,34 +38,57 @@ export default function Modal() {
                 style={customStylesModal}
                 contentLabel="Example ReactModal">
 
-                <h1>Detalhes do produto</h1>
+                <section className={styles.titleModal}>
+                    <h1>Detalhes do produto</h1>
+                    <button onClick={closeModalBoo}>
+                        Fechar
+                    </button>
+                </section>
 
-                <div>
-                    <label>ID: </label>
-                    <span>01</span>
+                <div className={styles.bodyModal}>
 
-                    <label>NOME: </label>
-                    <span>Sacola</span>
+                    <div>
+                        <section>
+                            <label>ID: </label>
+                            <strong>01</strong>
+                        </section>
 
-                    <label>COR: </label>
-                    <span>Verde</span>
+                        <section>
+                            <label>NOME: </label>
+                            <strong>Sacola</strong>
+                        </section>
+                    </div>
 
-                    <label>ESTOQUE: </label>
-                    <span>500</span>
+                    <div>
+                        <section>
+                            <label>COR: </label>
+                            <strong>Verde</strong>
+                        </section>
 
-                    <label>UNIDADE DE MEDIDA: </label>
-                    <span>Kg</span>
+                        <section>
+                            <label>ESTOQUE: </label>
+                            <strong>500</strong>
+                        </section>
+                    </div>
 
-                    <label>TAMANHO: </label>
-                    <span>P</span>
+                    <div>
+                        <section>
+                            <label>UNIDADE DE MEDIDA: </label>
+                            <strong>Kg</strong>
+                        </section>
 
-                    <label>PREÇO: </label>
-                    <span>{`R$ 50`}</span>
+                        <section>
+                            <label>TAMANHO: </label>
+                            <strong>P</strong>
+                        </section>
+                    </div>
+
+                    <div>
+                        <label>PREÇO: </label>
+                        <strong>{`R$ 50`}</strong>
+                    </div>
                 </div>
 
-                <button onClick={closeModalBoo}>
-                    Fechar
-                </button>
 
             </ReactModal>
 
