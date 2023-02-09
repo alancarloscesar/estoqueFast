@@ -6,6 +6,7 @@ import { FormEvent, useState } from 'react'
 import { api } from "../../services/apiClient"
 import { toast } from "react-hot-toast"
 import { FiSearch, FiShoppingCart, FiArrowLeft, FiArrowRight, FiEye } from "react-icons/fi"
+import Modal from "../../components/Modal"
 
 interface ProductProps {
     id: number;
@@ -38,6 +39,9 @@ export default function SaleNow() {
     const [selectPayment, setSelectPayment] = useState('')
     const [selectCard, setSelectCard] = useState('')
     const [selectInstallment, setSelectInstallment] = useState('')
+
+    //modal
+    const [visibleModal, setVisibleModal] = useState(false)
 
     async function pagination() {
         const response = await api.get('/pagination', {
@@ -98,6 +102,12 @@ export default function SaleNow() {
     function paymentCard() {
         console.log(selectPayment)
     }
+
+    function handleModal() {
+        setVisibleModal(true)
+        console.log(visibleModal)
+    }
+
 
 
     return (
@@ -161,7 +171,7 @@ export default function SaleNow() {
                                                         </button>
 
                                                         <button
-                                                            onClick={() => handleRowTable(item)}
+                                                            onClick={handleModal}
                                                             className={styles.btnEditTableRow}
                                                             title='Ver detalhes'
                                                         >
@@ -274,6 +284,8 @@ export default function SaleNow() {
 
                                     <button type="submit">Finalizar</button>
                                 </form>
+
+
                             </div>
                         )
                     }
@@ -281,10 +293,20 @@ export default function SaleNow() {
                     <p className={styles.priceTotal}>50,00 R$</p>
 
 
+                    {
+                        // modal abrindo
+                        visibleModal && (
+                            <Modal />
+                        )
+                    }
+
+
 
                 </main>
 
             </div>
+
+
         </>
     )
 }
