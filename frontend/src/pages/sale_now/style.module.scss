@@ -122,21 +122,22 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 0 5%;
-    border: 1px solid #212121;
-    padding: 2%;
+    justify-content: center;
+    margin: 1%;
+    border-bottom: 1px solid #212121;
+    padding: 1% 2%;
+    align-items: center;
 
     label {
-        font-size: 1.4vw;
+        font-size: 1vw;
         font-weight: bold;
         margin-top: 1.5%;
     }
 
     span {
         margin-top: 1.5%;
-        font-size: 1.5vw;
-        margin-right: 2%;
+        font-size: 1vw;
+        margin-right: 1%;
         margin-left: 1%;
     }
 }
@@ -162,14 +163,14 @@
         input {
             background-color: #fff;
             border: 0;
-            height: 3vw;
+            height: 6vh;
             width: 15vw;
             margin: 0 2%;
             padding-left: 2%;
             border-radius: 7vw;
             font-size: 16px;
         }
-        
+
         button {
             font-size: 16px;
             background-color: #00DFBF;
@@ -192,13 +193,48 @@
     }
 }
 
-.btnsActionTable{
+.bodyDataProduct {
+    display: flex;
+    flex-direction: column;
+    background-color: #00DFBF;
+    max-width: 40vw;
+    height: 35%;
+}
+
+.btnsActionTable {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 }
 
-.priceTotal{
+.priceTotal {
+    display: flex;
+    position: absolute;
+    flex-direction: row;
+    justify-content: flex-end;
     font-size: 5vw;
+    right: 2%;
+    bottom: 3%;
+    color: #212121;
+
+    label {
+        font-size: 2.5vw;
+        color: #00DFBF;
+        font-weight: bold;
+    }
+}
+
+.selectPayment {
+    background-color: #fff;
+    border: 0;
+    height: 6vh;
+    border-radius: 3vw;
+    margin: 0 1%;
+    padding: 0 1.5%;
+
+    option {
+        background-color: #fff;
+        color: #212121;
+    }
 }
