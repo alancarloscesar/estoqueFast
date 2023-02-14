@@ -75,9 +75,6 @@ export default function SaleNow() {
 
         pagination();
 
-        console.log('takeee: ', take);
-        console.log('skip: ', skip);
-
         return;
     }
 
@@ -103,12 +100,13 @@ export default function SaleNow() {
         console.log(selectPayment)
     }
 
-    function handleModal() {
+    function handleModal(item: ProductProps) {
         setVisibleModal(true)
+        setdataRowTable(item)
         console.log(visibleModal)
     }
 
-
+    // Modal.setAppElement('#__next');
 
     return (
         <>
@@ -171,7 +169,7 @@ export default function SaleNow() {
                                                         </button>
 
                                                         <button
-                                                            onClick={handleModal}
+                                                            onClick={() => handleModal(item)}
                                                             className={styles.btnEditTableRow}
                                                             title='Ver detalhes'
                                                         >
@@ -296,7 +294,8 @@ export default function SaleNow() {
                     {
                         // modal abrindo
                         visibleModal && (
-                            <Modal />
+
+                            <Modal item={dataRowTable} />
                         )
                     }
 

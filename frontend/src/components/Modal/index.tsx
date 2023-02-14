@@ -1,8 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactModal from "react-modal";
 import styles from './styles.module.scss'
+import { FiXCircle } from 'react-icons/fi'
 
-export default function Modal() {
+interface productProps {
+    item: {
+        id: number;
+        name: string;
+        color: string;
+        amount: number;
+        measure: string;
+        size: {
+            id: number;
+            price: number;
+            name: string;
+        }
+    }
+}
+
+export default function Modal(props: productProps) {
 
     const [openModal, setOpenModal] = useState(true)
 
@@ -22,10 +38,14 @@ export default function Modal() {
             right: 'auto',
             bottom: 'auto',
             marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
+            transform: 'translate(-50%, -50%)'
         },
     };
 
+    function teste() {
+        console.log(`###########`)
+        console.log(props.item.name)
+    }
 
     // Modal.setAppElement('#__next');
 
@@ -39,9 +59,9 @@ export default function Modal() {
                 contentLabel="Example ReactModal">
 
                 <section className={styles.titleModal}>
-                    <h1>Detalhes do produto</h1>
-                    <button onClick={closeModalBoo}>
-                        Fechar
+                    <p>Detalhes do produto</p>
+                    <button onClick={closeModalBoo} title='Fechar detalhes'>
+                        <FiXCircle size={40} color={'#acacac'} />
                     </button>
                 </section>
 
@@ -50,49 +70,49 @@ export default function Modal() {
                     <div>
                         <section>
                             <label>ID: </label>
-                            <strong>01</strong>
+                            <strong>{props.item.id}</strong>
+                            <strong></strong>
                         </section>
 
                         <section>
                             <label>NOME: </label>
-                            <strong>Sacola</strong>
+                            <strong>{props.item.name}</strong>
                         </section>
                     </div>
 
                     <div>
                         <section>
                             <label>COR: </label>
-                            <strong>Verde</strong>
+                            <strong>{props.item.color}</strong>
                         </section>
 
                         <section>
                             <label>ESTOQUE: </label>
-                            <strong>500</strong>
+                            <strong>{props.item.amount}</strong>
                         </section>
                     </div>
 
                     <div>
                         <section>
                             <label>UNIDADE DE MEDIDA: </label>
-                            <strong>Kg</strong>
+                            <strong>{props.item.measure}</strong>
                         </section>
 
                         <section>
                             <label>TAMANHO: </label>
-                            <strong>P</strong>
+                            <strong>{props.item.size.name}</strong>
                         </section>
                     </div>
 
                     <div>
                         <label>PREÇO: </label>
-                        <strong>{`R$ 50`}</strong>
+                        <strong onClick={teste}>{`R$ ${props.item.size.price}`}</strong>
                     </div>
                 </div>
 
 
             </ReactModal>
 
-            {/* <h1>JFSLDJFLÇSDKJFLKSDJFLKSDJFÇLSKDJFÇLKDSJ</h1> */}
         </>
     )
 }
