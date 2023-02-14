@@ -6,10 +6,10 @@ export class SalesNowController {
 
         const salesService = new SalesNowService();
 
-        const { amount, price, product_id, size_id } = req.body
+        const { amount, price, product_id, size_id, payment, card, installment } = req.body
 
         const sale_now = await salesService.execute({
-            amount, price, product_id, size_id
+            amount, price, product_id, size_id, payment, card, installment
         })
 
         return res.status(200).json(sale_now)

@@ -77,6 +77,9 @@ model SaleNow {
   date_sale DateTime @default(now())
   amount    Decimal @db.Decimal(9, 2)
   price     Decimal @db.Decimal(9, 2)
+  payment String?
+  card String? 
+  installment String?
 
   product    Product @relation(fields: [product_id], references: [id])
   product_id Int

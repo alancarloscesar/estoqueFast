@@ -5,13 +5,16 @@ interface SalesNowRequest {
     amount: number,
     price: number,
     product_id: number,
-    size_id: number
+    size_id: number,
+    payment: string,
+    card: string,
+    installment: string
 }
 
 export class SalesNowService {
 
 
-    async execute({ amount, product_id, size_id }: SalesNowRequest) {
+    async execute({ amount, product_id, size_id, payment, card, installment }: SalesNowRequest) {
 
         //busca dados para calcular o price no data
         const loadData = await prismaClient.product.findFirst({
@@ -30,7 +33,10 @@ export class SalesNowService {
                 amount,
                 price: Number(loadData.size.price) * amount,
                 product_id,
-                size_id
+                size_id,
+                payment,
+                card,
+                installment
             },
             include: {
                 size: {},

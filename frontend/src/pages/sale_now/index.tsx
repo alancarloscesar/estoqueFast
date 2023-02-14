@@ -43,6 +43,8 @@ export default function SaleNow() {
     //modal
     const [visibleModal, setVisibleModal] = useState(false)
 
+    const [totalPrice, setTotalPrice] = useState(0)
+
     async function pagination() {
         const response = await api.get('/pagination', {
             params: {
@@ -104,6 +106,30 @@ export default function SaleNow() {
         setVisibleModal(true)
         setdataRowTable(item)
         console.log(visibleModal)
+    }
+
+    function calcTotal() {
+        const total = Number(amountAfter) * Number(dataRowTable?.size.price);
+        setTotalPrice(total)
+    }
+
+    async function handleSaleNow(e: FormEvent) {
+        e.preventDefault();
+
+        await api.post('/sale', {
+            amount: amountAfter,
+            price: 123,
+            product_id: dataRowTable?.id,
+            size_id: dataRowTable?.size.id,
+            payment: '',
+            card: '',
+            installment: ''
+        }).then(() => {
+            toast.success('Venda realizada.')
+        }).catch((error) => {
+            console.log(error)
+        })
+        JA ESTÁ SALVANDO, PRECISA FUNCIONAR AS OUTRAS COISAS DOS SELECTS
     }
 
     // Modal.setAppElement('#__next');
@@ -203,7 +229,7 @@ export default function SaleNow() {
                                 <label>ID: </label>
                                 <span>{dataRowTable?.id}</span>
 
-                                <label>NOME: </label>
+                                <label>PRODUTO: </label>
                                 <span>{dataRowTable?.name}</span>
 
                                 <label>COR: </label>
@@ -212,7 +238,7 @@ export default function SaleNow() {
                                 <label>ESTOQUE: </label>
                                 <span>{dataRowTable?.amount}</span>
 
-                                <label>UNIDADE DE MEDIDA: </label>
+                                <label>MEDIDA: </label>
                                 <span>{dataRowTable?.measure}</span>
 
                                 <label>TAMANHO: </label>
@@ -224,24 +250,25 @@ export default function SaleNow() {
                         )
                     }
 
-
                     {
                         dataProductsVisible && (
                             <div className={styles.editDataProduct}>
-                                <p>Entrada de produtos.</p>
+                                {/* <p>Entrada de produtos.</p> */}
                                 {/* <form onSubmit={handleUpdateProductEntry}> */}
-                                <form>
+                                <form onSubmit={handleSaleNow}>
                                     <label>Quantidade: </label>
                                     <input
                                         placeholder="Nova Quantidade..."
                                         value={amountAfter}//aqui vai o value original
                                         onChange={(e) => setAmountAfter(e.target.value)}
                                         type={"number"}
+                                        onMouseLeave={calcTotal}
                                     />
 
                                     <label>Pagamento: </label>
                                     <select name="" id=""
                                         onChange={e => setSelectPayment(e.target.value)}
+                                        className={styles.selectPayment}
                                     >
                                         <option value="dinheiro">Dinheiro</option>
                                         <option value="cartao" onClick={paymentCard}>Cartão</option>
@@ -252,6 +279,7 @@ export default function SaleNow() {
                                         selectPayment === 'cartao' && (
                                             <select name="" id=""
                                                 onChange={e => setSelectCard(e.target.value)}
+                                                className={styles.selectPayment}
                                             >
                                                 <option value="debito">Débito</option>
                                                 <option value="credito">Crédito</option>
@@ -263,6 +291,7 @@ export default function SaleNow() {
                                         selectCard === 'credito' && (
                                             <select name="" id=""
                                                 onChange={e => setSelectInstallment(e.target.value)}
+                                                className={styles.selectPayment}
                                             >
                                                 <option value="1">1x</option>
                                                 <option value="2">2x</option>
@@ -288,7 +317,12 @@ export default function SaleNow() {
                         )
                     }
 
-                    <p className={styles.priceTotal}>50,00 R$</p>
+                    <footer className={styles.priceTotal}>
+                        <p>
+                            {totalPrice.toFixed(2)}
+                        </p>
+                        <label>R$</label>
+                    </footer>
 
 
                     {
