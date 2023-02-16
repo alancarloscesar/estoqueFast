@@ -116,20 +116,25 @@ export default function SaleNow() {
     async function handleSaleNow(e: FormEvent) {
         e.preventDefault();
 
+        if (amountAfter === '') {
+            toast.error("Preencha todos os campos para efetuar a venda.");
+            return;
+        }
+
         await api.post('/sale', {
             amount: amountAfter,
             price: 123,
             product_id: dataRowTable?.id,
             size_id: dataRowTable?.size.id,
-            payment: '',
-            card: '',
-            installment: ''
+            payment: selectPayment,
+            card: selectCard,
+            installment: selectCard === 'credito' ? selectInstallment : 'À vista'
         }).then(() => {
-            toast.success('Venda realizada.')
+            toast.success('Venda realizada!!!')
         }).catch((error) => {
             console.log(error)
         })
-        JA ESTÁ SALVANDO, PRECISA FUNCIONAR AS OUTRAS COISAS DOS SELECTS
+        // JA ESTÁ SALVANDO, PRECISA FUNCIONAR AS OUTRAS COISAS DOS SELECTS
     }
 
     // Modal.setAppElement('#__next');
@@ -318,7 +323,7 @@ export default function SaleNow() {
                     }
 
                     <footer className={styles.priceTotal}>
-                        <p>
+                        <p onClick={() => console.log(selectPayment)}>
                             {totalPrice.toFixed(2)}
                         </p>
                         <label>R$</label>
