@@ -134,7 +134,7 @@ export default function SaleNow() {
         }).catch((error) => {
             console.log(error)
         })
-        // JA ESTÁ SALVANDO, PRECISA FUNCIONAR AS OUTRAS COISAS DOS SELECTS
+        
     }
 
     // Modal.setAppElement('#__next');
