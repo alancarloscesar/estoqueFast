@@ -25,11 +25,11 @@ model User {
 }
 
 model Product {
-  id     Int     @id @default(autoincrement())
-  name   String
-  amount Decimal? @db.Decimal(9, 2)
-  color  String  @default("Sem cor")
-  stock  Boolean @default(false)
+  id      Int      @id @default(autoincrement())
+  name    String
+  amount  Decimal? @db.Decimal(9, 2)
+  color   String   @default("Sem cor")
+  stock   Boolean  @default(false)
   measure String
 
   created_at DateTime? @default(now())
@@ -66,25 +66,27 @@ model Size {
   category_id Int
   category    Category @relation(fields: [category_id], references: [id])
 
-  product Product[]
+  product   Product[]
   sales_now SaleNow[]
 
   @@map("sizes")
 }
 
 model SaleNow {
-  id        Int      @id @default(autoincrement())
-  date_sale DateTime @default(now())
-  amount    Decimal @db.Decimal(9, 2)
-  price     Decimal @db.Decimal(9, 2)
-  payment String? @default("null")
-  card String? @default("null")
-  installment String? @default("null")
+  id          Int      @id @default(autoincrement())
+  date_sale   DateTime @default(now())
+  amount      Decimal  @db.Decimal(9, 2)
+  price       Decimal  @db.Decimal(9, 2)
+  payment     String?  @default("null")
+  card        String?  @default("null")
+  installment String?  @default("null")
+  month       String?  @default("null")
+  year        String?  @default("null")
 
   product    Product @relation(fields: [product_id], references: [id])
   product_id Int
 
-  size Size @relation(fields: [size_id], references: [id])
+  size    Size @relation(fields: [size_id], references: [id])
   size_id Int
 
   @@map("salesNow")

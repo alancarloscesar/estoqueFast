@@ -19,6 +19,7 @@ import { DeleteProductByIdController } from "./controllers/product/DeleteProduct
 
 import { SalesNowController } from "./controllers/sale_now/sales_now_controller";
 import { CancelSaleController } from "./controllers/sale_now/cancelSaleController";
+import { LoadSaleMounthsController } from "./controllers/sale_now/LoadSaleMounthsController";
 
 import { ProductEntryController } from "./controllers/product_entry/productEntryController";
 
@@ -48,6 +49,7 @@ router.delete('/product/delete', isAuthenticated, new DeleteProductByIdControlle
 //ROTAS SALES NOW
 router.post('/sale', isAuthenticated, new SalesNowController().handle)
 router.delete('/cancel/sale', isAuthenticated, new CancelSaleController().handle)
+router.get('/sales/mounths', isAuthenticated, new LoadSaleMounthsController().handle)
 
 //ROTAS PRODUCT ENTRY
 router.put('/product/entry', isAuthenticated, new ProductEntryController().handle)
