@@ -5,7 +5,7 @@ class LoadSaleMounthsController {
     async handle(req: Request, res: Response) {
         const loadPriceSevice = new LoadSalePriceService();
 
-        const { month } = req.body;
+        const month = req.query.month as string;
 
         const loadprice = await loadPriceSevice.execute({ month });
 
