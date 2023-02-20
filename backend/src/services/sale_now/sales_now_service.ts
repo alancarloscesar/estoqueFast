@@ -1,4 +1,5 @@
-
+import { format, getMonth, getYear } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import prismaClient from "../../prisma";
 
 interface SalesNowRequest {
@@ -8,13 +9,15 @@ interface SalesNowRequest {
     size_id: number,
     payment: string,
     card: string,
-    installment: string
+    installment: string,
+    month: string;
+    year: string;
 }
 
 export class SalesNowService {
 
 
-    async execute({ amount, product_id, size_id, payment, card, installment }: SalesNowRequest) {
+    async execute({ amount, product_id, size_id, payment, card, installment, month, year }: SalesNowRequest) {
 
         //busca dados para calcular o price no data
         const loadData = await prismaClient.product.findFirst({
@@ -26,6 +29,9 @@ export class SalesNowService {
             }
         })
 
+        //// formatando mes e ano para salvar no bd
+        // asd
+
         //cria uma venda no banco
         const sales = await prismaClient.saleNow.create({
 
@@ -36,7 +42,9 @@ export class SalesNowService {
                 size_id,
                 payment,
                 card,
-                installment
+                installment,
+                month: format(new Date(), 'MMMM', { locale: ptBR }).toString(),
+                year: new Date().getFullYear().toString()
             },
             include: {
                 size: {},
