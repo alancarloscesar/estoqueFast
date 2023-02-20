@@ -115,7 +115,7 @@ export default function Mounths() {
         },
         plotOptions: {
             bar: {
-                borderRadius: 10,
+                borderRadius: 5,
                 dataLabels: {
                     position: 'top', // top, center, bottom
                 },
@@ -133,7 +133,7 @@ export default function Mounths() {
                 series={options.series}
                 type="bar"
                 width={'100%'}
-                height={'30%'}
+                height={'100%'}
                 className={styles.containerChart}
             />
 

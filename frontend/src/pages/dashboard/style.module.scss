@@ -10,3 +10,12 @@
     background-color: #e2e2e2;
     font-family: Roboto, sans-serif;
 }
+
+.chartsArea{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 35vh;
+    margin-top: 2%;
+}
