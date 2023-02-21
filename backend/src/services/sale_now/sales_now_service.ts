@@ -43,7 +43,7 @@ export class SalesNowService {
                 installment,
                 month: format(new Date(), 'MMMM', { locale: ptBR }).toString(),
                 year: new Date().getFullYear().toString(),
-                hours: format(new Date(), 'H:m', { locale: ptBR }).toString(),
+                hours: format(new Date(), 'H', { locale: ptBR }).toString(),
             },
             include: {
                 size: {},

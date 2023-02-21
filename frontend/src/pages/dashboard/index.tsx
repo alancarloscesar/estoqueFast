@@ -6,6 +6,7 @@ import { AuthContext } from "../../contexts/AuthContext"
 import { setupAPIClient } from "../../services/api"
 import Mounths from "../../components/Charts/Mounths"
 import Hours from "../../components/Charts/Hours"
+import Ranking from "../../components/Charts/Ranking"
 
 
 export default function Dashboard() {
@@ -27,7 +28,11 @@ export default function Dashboard() {
                         <Mounths />
                         <Hours />
                     </div>
-                    
+
+                    <div className={styles.chartsAreaRanking}>
+                        <Ranking />
+                    </div>
+
                 </main>
             </div>
         </>
