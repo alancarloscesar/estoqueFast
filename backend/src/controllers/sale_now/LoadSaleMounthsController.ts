@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { LoadSalePriceService } from "../../services/sale_now/loadSalePriceSevice";
+import { LoadSalePriceService } from "../../services/sale_now/loadSalePriceMonthSevice";
 
 class LoadSaleMounthsController {
     async handle(req: Request, res: Response) {

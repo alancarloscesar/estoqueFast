@@ -82,6 +82,7 @@ model SaleNow {
   installment String?  @default("null")
   month       String?  @default("null")
   year        String?  @default("null")
+  hours       String?  @default("null")
 
   product    Product @relation(fields: [product_id], references: [id])
   product_id Int

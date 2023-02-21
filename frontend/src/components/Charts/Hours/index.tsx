@@ -8,17 +8,17 @@ import dynamic from 'next/dynamic';
 const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 
-export default function Weeks() {
+export default function Hours() {
 
     const options = {
         series: [{
             name: 'Total Vendido',
-            data: [400, 130, 848, 470, 40, 480, 890]
+            data: [400, 130, 848, 470, 40, 480, 890, 400, 130, 848, 470]
         }],
 
         plotOptions: {
             bar: {
-                borderRadius: 7,
+                borderRadius: 2,
                 horizontal: true,
             }
         },
@@ -26,7 +26,7 @@ export default function Weeks() {
             enabled: false
         },
         xaxis: {
-            categories: ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo']
+            categories: ['08h', '09h', '10h', '11h', '12h', '13h', '14h', '15h', '16h', '17h', '18h']
         },
         colors: ['#4a148c'],
         grid: {

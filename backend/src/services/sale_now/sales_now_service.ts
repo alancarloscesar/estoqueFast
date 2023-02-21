@@ -12,12 +12,13 @@ interface SalesNowRequest {
     installment: string,
     month: string;
     year: string;
+    hours: string;
 }
 
 export class SalesNowService {
 
 
-    async execute({ amount, product_id, size_id, payment, card, installment, month, year }: SalesNowRequest) {
+    async execute({ amount, product_id, size_id, payment, card, installment, month, year, hours }: SalesNowRequest) {
 
         //busca dados para calcular o price no data
         const loadData = await prismaClient.product.findFirst({
@@ -28,9 +29,6 @@ export class SalesNowService {
                 size: {}
             }
         })
-
-        //// formatando mes e ano para salvar no bd
-        // asd
 
         //cria uma venda no banco
         const sales = await prismaClient.saleNow.create({
@@ -44,7 +42,8 @@ export class SalesNowService {
                 card,
                 installment,
                 month: format(new Date(), 'MMMM', { locale: ptBR }).toString(),
-                year: new Date().getFullYear().toString()
+                year: new Date().getFullYear().toString(),
+                hours: format(new Date(), 'H:m', { locale: ptBR }).toString(),
             },
             include: {
                 size: {},

@@ -1,4 +1,5 @@
 import prismaClient from "../../prisma";
+import {getWeekOfMonth, setDay, getDay} from 'date-fns'
 
 interface monthLike {
     month: string;
@@ -16,7 +17,6 @@ class LoadSalePriceService {
             orderBy: {
                 date_sale: 'asc'
             }
-
         });
 
         //pegando a soma dos preços
@@ -26,5 +26,4 @@ class LoadSalePriceService {
         return sum;
     }
 }
-
 export { LoadSalePriceService }

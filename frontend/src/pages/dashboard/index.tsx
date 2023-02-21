@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react"
 import { AuthContext } from "../../contexts/AuthContext"
 import { setupAPIClient } from "../../services/api"
 import Mounths from "../../components/Charts/Mounths"
-import Weeks from "../../components/Charts/Weeks"
+import Hours from "../../components/Charts/Hours"
 
 
 export default function Dashboard() {
@@ -25,7 +25,7 @@ export default function Dashboard() {
 
                     <div className={styles.chartsArea}>
                         <Mounths />
-                        <Weeks />
+                        <Hours />
                     </div>
                     
                 </main>
