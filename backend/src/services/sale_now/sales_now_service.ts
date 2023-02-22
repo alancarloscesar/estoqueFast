@@ -30,6 +30,24 @@ export class SalesNowService {
             }
         })
 
+        const saleExist = await prismaClient.saleNow.findFirst({
+            where:{
+                product_id,
+                size_id
+            }
+        })
+        if(saleExist){
+            await prismaClient.saleNow.updateMany({
+                where:{
+                    product_id,
+                    size_id
+                },
+                data:{
+                    saleCont: Number(saleExist.saleCont) + 1
+                }
+            })
+        }
+
         //cria uma venda no banco
         const sales = await prismaClient.saleNow.create({
 

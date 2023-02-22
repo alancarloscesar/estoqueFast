@@ -83,6 +83,7 @@ model SaleNow {
   month       String?  @default("null")
   year        String?  @default("null")
   hours       String?  @default("null")
+  saleCont    Int?     @default(1)
 
   product    Product @relation(fields: [product_id], references: [id])
   product_id Int

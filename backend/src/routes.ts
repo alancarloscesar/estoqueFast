@@ -21,6 +21,7 @@ import { SalesNowController } from "./controllers/sale_now/sales_now_controller"
 import { CancelSaleController } from "./controllers/sale_now/cancelSaleController";
 import { LoadSaleMounthsController } from "./controllers/sale_now/LoadSaleMounthsController";
 import { LoadSalePriceHoursService } from "./services/sale_now/loadSalePriceHoursService";
+import { topTreeProductSaleController } from "./controllers/sale_now/topTreeProductSaleController";
 
 import { ProductEntryController } from "./controllers/product_entry/productEntryController";
 
@@ -53,6 +54,8 @@ router.post('/sale', isAuthenticated, new SalesNowController().handle)
 router.delete('/cancel/sale', isAuthenticated, new CancelSaleController().handle)
 router.get('/sales/mounths', isAuthenticated, new LoadSaleMounthsController().handle)
 router.get('/sales/weeks', isAuthenticated, new LoadSaleHoursController().handle)
+router.get('/sales/ranking', isAuthenticated,  new topTreeProductSaleController().handle)
+
 
 //ROTAS PRODUCT ENTRY
 router.put('/product/entry', isAuthenticated, new ProductEntryController().handle)
