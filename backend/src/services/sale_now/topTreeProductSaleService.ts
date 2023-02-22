@@ -1,6 +1,7 @@
 import prismaClient from "../../prisma";
-import {format} from "date-fns";
+import { format } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
+
 
 
 class topTreeProductSaleService {
@@ -16,10 +17,16 @@ class topTreeProductSaleService {
             },
             take: 3,//max de results
 
-            include:{
-                product:{}
+            distinct: ['product_id'],//náo deixa duplica o campo
+
+
+
+            include: {
+                product: {},
             }
         })
+
+
 
         return salePodium;
     }
