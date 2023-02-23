@@ -6,6 +6,7 @@ import { getHours, format } from "date-fns"
 
 //erro no next - config que funciona
 import dynamic from 'next/dynamic';
+import ptBR from "date-fns/locale/pt-BR";
 const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 interface propsProd {
@@ -18,8 +19,7 @@ interface propsProd {
 export default function Ranking() {
 
     const [top, setTop] = useState<propsProd[]>([])
-    const [top2, setTop2] = useState([])
-    const [top3, setTop3] = useState([])
+
 
     useEffect(() => {
 
@@ -40,42 +40,62 @@ export default function Ranking() {
 
 
     const options = {
-        series: [500, 700, 400, 450],
-        labels: ['Sacola Extra', 'Sacola Alça fina', 'Sacola Premium'],
+        series: [900, 700, 400],
+        labels: [`${top[0]?.product?.name}`, `${top[1]?.product?.name}`, `${top[2]?.product?.name}`],
+        colors: ['#feb019', '#8d99ae', '#d89d6a'],
 
         chartOptions: {
-            labels: ['Sacola Extra', 'Sacola Alça fina', 'Sacola Premium']
+            labels: [`${top[0]?.product?.name}`, `${top[1]?.product?.name}`, `${top[2]?.product?.name}`]
         }
     }
 
     return (
         <>
 
-            {/* <section className={styles.chart}> */}
-            <ApexCharts
-                options={options}
-                series={options.series}
-                type="donut"
-                width={'100%'}
-                height={'100%'}
-                className={styles.chart}
-            />
-            {/* </section> */}
+            <div className={styles.areaRankingGeral}>
 
-            {
+                <div className={styles.areaRankingContent}>
+                    <p>TOP 3 - {format(new Date(), 'MMMM', { locale: ptBR }).toString().toLocaleUpperCase()}</p>
 
-                top.map((item, index) => {
-                    return (
-                        <span key={item.id}>
-                            {item.product.name}
-                        </span>
-                    )
-                })
+                    <div className={styles.areaRankingTopTree}>
 
-                //OK JA ESTA TRAZENDO OS DADOS, MAS AINDA PRECISA TRAZER JUNTO AOS DADOS A 
-                //QTD DE VENDAS E VALOR VENDIDO E MONTAR O HTML E CSS DO RANKING
-                // BUSCAR INSPIRACAO NO CANVA
-            }
+                        <div>
+                            <p>{top[1]?.product?.name}</p>
+                            <p>7213</p>
+                            <section className={styles.rankingTop2}>2</section>
+                        </div>
+
+                        <div>
+                            <p>{top[0]?.product?.name}</p>
+                            <section className={styles.rankingTop1}>1</section>
+                        </div>
+
+                        <div>
+                            <p>{top[2]?.product?.name}</p>
+                            <section className={styles.rankingTop3}>3</section>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div className={styles.chart}>
+                    <ApexCharts
+                        options={options}
+                        series={options.series}
+                        type="donut"
+                        height={'100%'}
+                        width={'100%'}
+                        className={styles.chartPie}
+                    />
+                </div>
+
+            </div>
+
+
+            //OK JA ESTA TRAZENDO OS DADOS, MAS AINDA PRECISA TRAZER JUNTO AOS DADOS A 
+                //QTD DE VENDAS E VALOR VENDIDO
+           
+
         </>
     )
 }
