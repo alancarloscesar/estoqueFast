@@ -20,13 +20,10 @@ class topTreeProductSaleService {
             distinct: ['product_id'],//náo deixa duplica o campo
 
 
-
             include: {
                 product: {},
             }
         })
-
-
 
         return salePodium;
     }
