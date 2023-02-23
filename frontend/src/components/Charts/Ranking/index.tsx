@@ -11,6 +11,7 @@ const ApexCharts = dynamic(() => import('react-apexcharts'), { ssr: false });
 
 interface propsProd {
     id: number;
+    saleCont: number;
     product: {
         name: string
     }
@@ -18,7 +19,7 @@ interface propsProd {
 
 export default function Ranking() {
 
-    const [top, setTop] = useState<propsProd[]>([])
+    const [podium, setPodium] = useState<propsProd[]>([])
 
 
     useEffect(() => {
@@ -26,7 +27,7 @@ export default function Ranking() {
         async function loadRanking() {
             await api.get('/sales/ranking')
                 .then((response) => {
-                    setTop(response.data)
+                    setPodium(response.data)
                 })
                 .catch((err) => {
                     console.log(err)
@@ -40,12 +41,12 @@ export default function Ranking() {
 
 
     const options = {
-        series: [900, 700, 400],
-        labels: [`${top[0]?.product?.name}`, `${top[1]?.product?.name}`, `${top[2]?.product?.name}`],
+        series: [Number(podium[0]?.saleCont), Number(podium[1]?.saleCont), Number(podium[2]?.saleCont)],
+        labels: [`${podium[0]?.product?.name}`, `${podium[1]?.product?.name}`, `${podium[2]?.product?.name}`],
         colors: ['#feb019', '#8d99ae', '#d89d6a'],
 
         chartOptions: {
-            labels: [`${top[0]?.product?.name}`, `${top[1]?.product?.name}`, `${top[2]?.product?.name}`]
+            labels: [`${podium[0]?.product?.name}`, `${podium[1]?.product?.name}`, `${podium[2]?.product?.name}`]
         }
     }
 
@@ -60,19 +61,21 @@ export default function Ranking() {
                     <div className={styles.areaRankingTopTree}>
 
                         <div>
-                            <p>{top[1]?.product?.name}</p>
-                            <p>7213</p>
+                            <strong>{podium[1]?.product?.name}</strong>
                             <section className={styles.rankingTop2}>2</section>
+                            <p>Vendas: {podium[1]?.saleCont}</p>
                         </div>
 
                         <div>
-                            <p>{top[0]?.product?.name}</p>
+                            <strong>{podium[0]?.product?.name}</strong>
                             <section className={styles.rankingTop1}>1</section>
+                            <p>Vendas: {podium[0]?.saleCont}</p>
                         </div>
 
                         <div>
-                            <p>{top[2]?.product?.name}</p>
+                            <strong>{podium[2]?.product?.name}</strong>
                             <section className={styles.rankingTop3}>3</section>
+                            <p>Vendas: {podium[2]?.saleCont}</p>
                         </div>
 
                     </div>
@@ -92,8 +95,8 @@ export default function Ranking() {
             </div>
 
 
-            //OK JA ESTA TRAZENDO OS DADOS, MAS AINDA PRECISA TRAZER JUNTO AOS DADOS A 
-                //QTD DE VENDAS E VALOR VENDIDO
+            {/* //OK JA ESTA TRAZENDO OS DADOS, MAS AINDA PRECISA TRAZER JUNTO AOS DADOS A 
+                //QTD DE VENDAS E VALOR VENDIDO */}
            
 
         </>

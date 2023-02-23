@@ -4,6 +4,14 @@
 
 .container {
 
+    p {
+        font-size: 3vw;
+        color: #5a5959;
+        height: 10%;
+        width: 100%;
+        text-align: center;
+    }
+
     //escondendo setas do input number
     /* Chrome e outros */
     input::-webkit-outer-spin-button,

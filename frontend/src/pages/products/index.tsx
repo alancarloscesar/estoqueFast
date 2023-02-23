@@ -104,9 +104,9 @@ export default function Products() {
 
                 <Menu />
                 <main className={styles.container}>
-                    <h1>
+                    <p>
                         Cadastro de produtos
-                    </h1>
+                    </p>
 
                     <form onSubmit={handleAddProduct}>
                         <section className={styles.inputRowOne}>
