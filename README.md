@@ -24,6 +24,8 @@ FastStock é um sistema de estoque e vendas com as funcionalidades:
 - React icons, hot-toast, modal, switch
 - Apexcharts
 
+DOCUMENTAÇÃO DA API : https://documenter.getpostman.com/view/25109178/2s93CSnAXh
+
 Demonstração:
 
 
