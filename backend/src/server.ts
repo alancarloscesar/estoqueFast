@@ -24,7 +24,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {//midd
     })
 })
 
-app.listen(3333, () => {
+app.listen(process.env.PORT, () => {
     console.log("Servidor estoqueFast rodando... ")
 })
 
