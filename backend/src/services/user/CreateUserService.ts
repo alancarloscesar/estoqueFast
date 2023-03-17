@@ -1,5 +1,5 @@
 import prismaClient from "../../prisma";
-import {hash} from 'bcryptjs'
+import { hash } from 'bcryptjs'
 
 interface UserRequest {
     name: string;
@@ -16,9 +16,14 @@ class CreateUserService {
             }
         })
 
-        if(emailUserExist){
+        if (emailUserExist) {
             throw new Error("Email já cadastrado!")
             return;
+        }
+
+        if (name == '' || email === '' || password === '') {
+            throw new Error("Campos NOME, EMAIL e SENHA não podem ficar vazios!");
+
         }
 
         //criptando senha

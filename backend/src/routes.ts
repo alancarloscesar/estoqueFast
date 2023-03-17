@@ -5,6 +5,7 @@ import { isAuthenticated } from "./middlewares/isAuthenticated";
 import { CreateUserController } from "./controllers/user/CreateUserController";
 import { AuthController } from "./controllers/user/AuthController";
 import { DetailUserController } from "./controllers/user/DetailUserController";
+import { DeleteUserTestController } from "./controllers/user/DeleteUserTestController";
 
 import { createCategoryController } from "./controllers/category/createCategoryController";
 import { loadCategoryController } from "./controllers/category/loadCategoryController";
@@ -34,6 +35,7 @@ const router = Router();
 router.post('/user', new CreateUserController().handle)
 router.post('/session', new AuthController().handle)
 router.get('/me', isAuthenticated, new DetailUserController().handle)
+router.delete('/del', new DeleteUserTestController().handle)
 
 //ROTAS CATEGORY
 router.post('/category', isAuthenticated, new createCategoryController().handle)
