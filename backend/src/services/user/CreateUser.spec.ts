@@ -4,7 +4,7 @@ import app from "../../server";
 import { describe, expect, it } from '@jest/globals';
 
 
-describe("User tests use cases", () => {
+describe("User creation test cases", () => {
 
 
     it("Should to create a new user", async () => {
@@ -36,12 +36,12 @@ describe("User tests use cases", () => {
 
     it("Should check fields (name, email and password) that are mandatory.", async () => {
         const response = await request(app)
-        .post("/user")
-        .send({
-            name: "",
-            email: "",
-            password: ""
-        });
+            .post("/user")
+            .send({
+                name: "",
+                email: "",
+                password: ""
+            });
 
         expect(response.body.errr).toEqual("Campos NOME, EMAIL e SENHA não podem ficar vazios!")
     })
@@ -49,11 +49,24 @@ describe("User tests use cases", () => {
     //rota para delete de user test
     it("Delete bd tests.", async () => {
         await request(app)
-        .delete("/del")
-        .send({
-            email: "alan@test.com",
-        });
+            .delete("/del")
+            .send({
+                email: "alan@test.com",
+            });
 
         // expect(s).toEqual("Campos NOME, EMAIL e SENHA não podem ficar vazios!")
     })
+});
+
+describe("Login tests cases", () => {
+    it("Should verify email and password exist.", async () => {
+        const response = await request(app)
+            .post("/session")
+            .send({
+                email: "alan@dev.com",
+                password: "123123"
+            })
+
+        expect(response.body.errr).toEqual("Email/Password não existe na base de dados")
+    });
 });
