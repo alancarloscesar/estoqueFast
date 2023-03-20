@@ -56,17 +56,32 @@ describe("User creation test cases", () => {
 
         // expect(s).toEqual("Campos NOME, EMAIL e SENHA não podem ficar vazios!")
     })
+
 });
 
 describe("Login tests cases", () => {
+    
+    
     it("Should verify email and password exist.", async () => {
+        const response = await request(app)
+            .post("/session")
+            .send({
+                email: "alancarlos@dev.com",
+                password: "123123"
+            })
+    
+        expect(response.body.errr).toEqual("Email/Password não existe na base de dados")
+    });
+
+    it("Should check if the user registration returns a token.", async () => {
         const response = await request(app)
             .post("/session")
             .send({
                 email: "alan@dev.com",
                 password: "123123"
             })
-
-        expect(response.body.errr).toEqual("Email/Password não existe na base de dados")
+    
+        expect(response.body).toHaveProperty("token");
     });
+
 });
